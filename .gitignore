@@ -34,3 +34,4 @@ build/
 
 ### UI ###
 /schattenzorn-ui/package-lock.json
+/schattenzorn-ui/node_modules

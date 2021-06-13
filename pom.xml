@@ -6,6 +6,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>schattenzorn-backend</module>
+    <module>schattenzorn-ui</module>
   </modules>
   <parent>
     <groupId>org.springframework.boot</groupId>
