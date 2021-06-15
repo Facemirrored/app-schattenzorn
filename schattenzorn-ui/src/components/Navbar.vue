@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar transparent navbar-expand-lg navbar-dark">
+  <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container-fluid">
       <span class="navbar-brand" href="#">Schattenzorn</span>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

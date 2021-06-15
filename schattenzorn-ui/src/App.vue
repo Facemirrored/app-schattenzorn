@@ -27,6 +27,6 @@ export default {
 
 body {
   background: rgb(0,0,0);
-  background: linear-gradient(120deg, rgba(0,0,0,1) 20%, rgba(255, 151, 0, 0.93) 40%, rgba(0,0,0,1) 60%);
+  background: linear-gradient(130deg, rgb(255, 255, 255) 30%, rgba(255, 0, 0, 0.93) 40%, rgb(255, 255, 255) 55%);
 }
 </style>
