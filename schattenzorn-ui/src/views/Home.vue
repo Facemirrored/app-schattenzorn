@@ -1,9 +1,6 @@
 <template>
-  <div class="row mt-4">
-    <img class="logo col-md-2" src="@/assets/SchattenzornLogo3.png" alt="lol"/>
-    <div class="col-md-8 justify-content-center mt-5">
-      <h1>Schattenzorn</h1>
-    </div>
+  <div class="row col-auto">
+    <img src="../assets/title3-transparent.png" alt="logo"/>
   </div>
   <div class="container welcome-container mt-5">
     <h5>Schattenzorn</h5>
@@ -37,11 +34,6 @@ export default {
 </script>
 
 <style>
-
-.headline {
-  align-content: center;
-  alignment: center;
-}
 
 .welcome-container {
 
