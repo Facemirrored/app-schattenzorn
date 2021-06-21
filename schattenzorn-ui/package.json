@@ -13,25 +13,51 @@
     "vue-router": "^4.0.8"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-vue": "^7.0.0",
+    "typescript": "^4.3.4"
   },
   "eslintConfig": {
     "root": true,
     "env": {
       "node": true
     },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
+    "ignorePatterns": [
+      "node_modules",
+      "dist",
+      "coverage"
     ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:vue/base",
+      "plugin:vue/vue3-essential",
+      "prettier"
+    ],
+    "plugins": [
+      "vue",
+      "@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "babel-eslint",
+      "allowImportExportEverywhere": true,
+      "ecmaFeatures": {
+        "legacyDecorators": true,
+        "modules": true,
+        "experimentalObjectRestSpread": true
+      },
+      "ecmaVersion": 6,
+      "sourceType": "module"
     },
     "rules": {}
   },

@@ -1,7 +1,19 @@
 <template>
-  <div class="row col-auto">
-    <img src="../assets/title3-transparent.png" alt="logo"/>
-  </div>
+  <ContentSlot headline="Schattenzorn" content="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+      clita
+      kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+      sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+      sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
+      justo
+      duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+      Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
+      feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,">
+  </ContentSlot>
   <div class="container welcome-container mt-5">
     <h5>Schattenzorn</h5>
     <p>Willkommen auf dieser noch sehr stumpfen Homepage!</p>
@@ -23,13 +35,16 @@
 </template>
 
 <script lang="ts">
+import ContentSlot from "../components/ContentSlot.vue";
+
 export default {
   name: 'Home',
+  components: {ContentSlot},
   props: {
     logo: {
       default: ''
     },
-  }
+  },
 }
 </script>
 
