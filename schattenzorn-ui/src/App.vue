@@ -40,17 +40,10 @@
     color: white;
   }
 
-  html,
   body {
-    min-height: 100%;
-  }
-
-  body {
-    background: linear-gradient(
-      130deg,
-      rgb(2, 0, 0) 30%,
-      rgba(255, 0, 0, 0.93) 40%,
-      rgb(9, 0, 0) 55%
-    );
+    width: 100%;
+    height: auto;
+    background: linear-gradient(130deg, black 20%, #045969 40%, #400504 80%)
+      no-repeat fixed;
   }
 </style>
