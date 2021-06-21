@@ -1,4 +1,4 @@
 export interface TextContent {
-    headline: string;
-    content: string;
+  headline: string;
+  content: string;
 }
