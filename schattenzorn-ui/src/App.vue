@@ -40,6 +40,11 @@
     color: white;
   }
 
+  html,
+  body {
+    min-height: 100%;
+  }
+
   body {
     background: linear-gradient(
       130deg,

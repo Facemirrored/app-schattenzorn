@@ -1,4 +1,10 @@
-export interface TextContent {
+export interface ContentSlotItem {
   headline: string;
-  content: string;
+  subHeadline: string;
+  contentItems: ContentPartItem[];
+}
+
+export interface ContentPartItem {
+  itemHeadline: string;
+  itemTextList: string[];
 }

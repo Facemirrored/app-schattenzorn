@@ -1,63 +1,61 @@
 <template>
-  <ContentSlot
-    headline="Schattenzorn"
-    content="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-      dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
-      clita
-      kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-      sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-      sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-      justo
-      duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-
-      Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
-      feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
-      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,"
-  >
-  </ContentSlot>
-  <!--  <div class="container welcome-container mt-5">-->
-  <!--    <h5>Schattenzorn</h5>-->
-  <!--    <p>Willkommen auf dieser noch sehr stumpfen Homepage!</p>-->
-  <!--    <p>-->
-  <!--      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy-->
-  <!--      eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam-->
-  <!--      voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet-->
-  <!--      clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit-->
-  <!--      amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam-->
-  <!--      nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed-->
-  <!--      diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.-->
-  <!--      Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor-->
-  <!--      sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed-->
-  <!--      diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam-->
-  <!--      erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea-->
-  <!--      rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum-->
-  <!--      dolor sit amet. Duis autem vel eum iriure dolor in hendrerit in vulputate-->
-  <!--      velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis-->
-  <!--      at vero eros et accumsan et iusto odio dignissim qui blandit praesent-->
-  <!--      luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem-->
-  <!--      ipsum dolor sit amet,-->
-  <!--    </p>-->
-  <!--  </div>-->
+  <ContentSlot :content-slot-item="aboutUs" />
 </template>
 
 <script lang="ts">
   import ContentSlot from "../components/ContentSlot.vue";
+  import { ContentSlotItem } from "@/ts/interfaces";
 
   export default {
     name: "Home",
     components: { ContentSlot },
+    data() {
+      return {
+        aboutUs: {
+          headline:
+            "Der 'Schattenzorn' ist eine Allianzgilde auf dem deutschen RP-PVE Realm Celebras",
+          subHeadline: "Gründung: Mai 2021",
+          contentItems: [
+            {
+              itemHeadline: "Die Entstehung",
+              itemTextList: [
+                "Einige Mitglieder von uns, spielen fast seit Anfang der Classic Ära zusammen. Und auch wenn sich die Wege mal kurzzeitig trennten, weil viele vorübergehend in anderen Gilden spielten, fanden wir immer wieder zusammen.",
+                'Jeder von uns konnte in den unterschiedlichen Gilden seine Erfahrung sammeln. Mit der Zeit und nach einigen Gesprächen, entwickelte sich eine Vorstellung davon wie wohl die "perfekte" Gemeinschaft auszusehen hat.',
+                'Als sich das nächste Kapitel (Burning Crusade classic) ankündigte, entschlossen wir uns dazu das Projekt "Schattenzorn" passend zum Start der Erweiterung zu beginnen.',
+              ],
+            },
+            {
+              itemHeadline: "Unsere Philosophie",
+              itemTextList: [
+                'Eine Gilde ist und darf nicht nur Mittel zum Zweck sein, die Freude etwas zu schaffen, ist viel größer wenn man den Erfolg als eingeschworene Gemeinschaft schafft. Dazu gehört natürlich nicht nur die regelmäßige Teilnahme an den Raids, sondern es ist vielmehr ein Miteinander, sich gegenseitig helfen und unterstützen. Der Gedanke dabei sollte nicht "Ich mache das für meinen Erfolg" sondern "Ich mache das für unseren Erfolg" sein.',
+              ],
+            },
+            {
+              itemHeadline: "RP? PVE? PVP?",
+              itemTextList: [
+                "Wir versuchen jeden Bereich abzudecken, der Fokus liegt dabei aber auf den PVE-Inhalten. Das Rollenspiel ist allerdings gerne gesehen und wird auch durch uns gefördert. RP Events werden wir, sofern genügend Interesse besteht planen und durchführen bzw. unterstützen.",
+              ],
+            },
+            {
+              itemHeadline: "Unsere Ziele",
+              itemTextList: [
+                'Unser Ziel ist, dass erfolgreiche Spiel mit einer festen und motivierten Gruppe. Oberste Priorität hat dabei, den Spaß und das "wir Gefühl" nicht aus den Augen zu verlieren.',
+              ],
+            },
+            {
+              itemHeadline: "Worauf wir Wert legen",
+              itemTextList: [
+                'Es sollte selbstverständlich sein, dass jeder weiß worauf es bei seiner Klasse ankommt. Alles andere ist erlernbar und ausbaufähig. Wir legen großen Wert darauf, dass der "Schattenzorn" und seine Mitglieder einen positiven Eindruck auf andere Spieler von "Celebras" hinterlassen.',
+              ],
+            },
+          ],
+        } as ContentSlotItem,
+      };
+    },
   };
 </script>
 
 <style>
-  .welcome-container {
-    background: rgba(232, 232, 232, 1);
-    border-radius: 10px;
-    color: black;
-  }
-
   h1 {
     color: #111;
     font-family: Brush Script MT, Brush Script Std, cursive, sans-serif;
