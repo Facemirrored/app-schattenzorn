@@ -1,24 +1,23 @@
 <template>
   <div id="headline-bar" class="mb-5 row">
-      <img class="logo col-2" src="../src/assets/SchattenzornLogo.png" alt="">
-      <h1 class="headline-text mt-5 offset-2 col-8">Schattenzorn</h1>
+    <img class="logo col-2" src="../src/assets/SchattenzornLogo.png" alt="" />
+    <h1 class="headline-text mt-5 offset-2 col-8">Schattenzorn</h1>
   </div>
   <navbar></navbar>
   <home></home>
 </template>
 
 <script>
-
 import Navbar from "@/components/Navbar";
 import Home from "@/views/Home";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     navbar: Navbar,
     home: Home,
-  }
-}
+  },
+};
 </script>
 
 <style>
@@ -41,6 +40,11 @@ export default {
 }
 
 body {
-  background: linear-gradient(130deg, rgb(2, 0, 0) 30%, rgba(255, 0, 0, 0.93) 40%, rgb(9, 0, 0) 55%);
+  background: linear-gradient(
+    130deg,
+    rgb(2, 0, 0) 30%,
+    rgba(255, 0, 0, 0.93) 40%,
+    rgb(9, 0, 0) 55%
+  );
 }
 </style>
