@@ -1,19 +1,19 @@
 <template>
-  <content-slot :content-slot-item="aboutUs" />
+  <ContentSlot :content-slot-item="aboutUs" />
 </template>
 
 <script lang="ts">
-  import ContentSlot from "@/components/ContentSlot.vue";
+  import ContentSlot from "../components/ContentSlot.vue";
   import { ContentSlotItem } from "@/ts/interfaces";
+
   export default {
     name: "Home",
-    components: {
-      ContentSlot,
-    },
+    components: { ContentSlot },
     data() {
       return {
         aboutUs: {
-          headline: "Dlsiefjierogfjeirofjioergfjirogfjn RP-PVE Realm Celebras",
+          headline:
+            "Der 'Schattenzorn' ist eine Allianzgilde auf dem deutschen RP-PVE Realm Celebras",
           subHeadline: "Gründung: Mai 2021",
           contentItems: [
             {
@@ -55,4 +55,23 @@
   };
 </script>
 
-<style></style>
+<style scoped>
+  h1 {
+    color: #111;
+    font-family: Brush Script MT, Brush Script Std, cursive, sans-serif;
+    font-size: 150px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+
+  p {
+    color: #685206;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 0 24px;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+</style>

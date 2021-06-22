@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "vue": "^3.0.5",
-    "vue-router": "^4.0.10"
+    "vue-router": "^4.0.10",
+    "animate.css": "4.1.1"
   },
   "devDependencies": {
     "@types/node": "^15.12.4",

@@ -28,11 +28,11 @@
               >Über Schattenzorn</router-link
             >
           </li>
-          <li class="nav-item">
-            <router-link to="/rules" class="nav-link active" aria-current="page"
-              >Gildenregeln</router-link
-            >
-          </li>
+          <!--          <li class="nav-item">-->
+          <!--            <router-link to="/rules" class="nav-link active" aria-current="page"-->
+          <!--              >Gildenregeln</router-link-->
+          <!--            >-->
+          <!--          </li>-->
         </ul>
       </div>
     </div>
