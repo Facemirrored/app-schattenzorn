@@ -45,7 +45,7 @@
     border: 2px solid #132428;
     background-color: rgba(13, 29, 29, 0.8);
     color: white;
-    margin: 50px 300px;
+    margin: 100px 300px;
   }
   .content-text {
     margin-left: 100px;

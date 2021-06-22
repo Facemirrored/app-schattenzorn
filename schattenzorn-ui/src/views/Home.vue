@@ -1,13 +1,15 @@
 <template>
-  <content-slot :content-slot-item="aboutUs" />
+  <news-slot></news-slot>
 </template>
 
 <script lang="ts">
   import ContentSlot from "@/components/ContentSlot.vue";
   import { ContentSlotItem } from "@/ts/interfaces";
+  import NewsSlot from "@/components/NewsSlot.vue";
   export default {
     name: "Home",
     components: {
+      NewsSlot,
       ContentSlot,
     },
     data() {
