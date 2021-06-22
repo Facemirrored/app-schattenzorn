@@ -83,8 +83,8 @@
 
   .slide-leave-active {
     position: absolute;
-    transition: all 0.5s ease;
-    opacity: 0;
+    transition: all 0.85s ease;
+    left: 100%;
   }
 
   .slide-enter-from {
@@ -96,6 +96,6 @@
   }
 
   .slide-leave-from {
-    transform: scale(1);
+    left: 0;
   }
 </style>
