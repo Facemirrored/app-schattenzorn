@@ -2,15 +2,8 @@
   <div class="row news-slot">
     <div class="news-date col-2 position-relative">
       <div class="d-flex justify-content-center">
-        <h2 class="position-relative" style="padding-top: 20px; z-index: 2">
-          22
-        </h2>
-        <h3
-          class="position-relative"
-          style="padding-top: 22px; padding-left: 10px; z-index: 2"
-        >
-          Juni
-        </h3>
+        <h2 class="position-relative news-date-day">22</h2>
+        <h3 class="position-relative news-date-month">Juni</h3>
       </div>
       <img
         class="news-image"
@@ -38,11 +31,23 @@
 </script>
 
 <style scoped>
+  .news-date-day {
+    font-weight: bold;
+    padding-top: 20px;
+    z-index: 2;
+    text-shadow: 10px 10px 4px #a00101, 0 0 0 black;
+  }
+  .news-date-month {
+    font-weight: bold;
+    padding-top: 22px;
+    padding-left: 10px;
+    z-index: 2;
+    text-shadow: 10px 10px 4px #017070, 0 0 0 black;
+  }
   .news-image {
     left: -25%;
     top: -15%;
     position: absolute;
-    opacity: 0.5;
     z-index: 1;
   }
   .news-date {
