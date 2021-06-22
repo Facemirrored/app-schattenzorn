@@ -5,7 +5,7 @@
   </div>
   <navbar></navbar>
   <router-view v-slot="{ Component }">
-    <transition name="slide">
+    <transition name="custom-fade" mode="out-in">
       <component :is="Component"></component>
     </transition>
   </router-view>
@@ -41,22 +41,18 @@
     margin-top: 20px;
     margin-right: 20px;
   }
-
   .logo {
     margin-top: 10px;
   }
-
   .headline-text {
     color: white;
   }
-
   body {
     width: 100%;
     height: auto;
     background: linear-gradient(130deg, black 20%, #045969 40%, #400504 80%)
       no-repeat fixed;
   }
-
   h1 {
     color: #111;
     font-family: Brush Script MT, Brush Script Std, cursive, sans-serif;
@@ -65,7 +61,6 @@
     letter-spacing: 5px;
     line-height: 1;
   }
-
   p {
     color: #685206;
     font-family: "Helvetica Neue", sans-serif;
@@ -75,27 +70,13 @@
     text-align: justify;
     text-justify: inter-word;
   }
-
-  .slide-enter-active {
-    position: absolute;
-    transition: all 0.85s ease;
+  .custom-fade-enter-active,
+  .custom-fade-leave-active {
+    transition: opacity 0.5s ease;
   }
 
-  .slide-leave-active {
-    position: absolute;
-    transition: all 0.85s ease;
-    left: 100%;
-  }
-
-  .slide-enter-from {
-    left: -100%;
-  }
-
-  .slide-enter-to {
-    left: 0;
-  }
-
-  .slide-leave-from {
-    left: 0;
+  .custom-fade-enter-from,
+  .custom-fade-leave-to {
+    opacity: 0;
   }
 </style>

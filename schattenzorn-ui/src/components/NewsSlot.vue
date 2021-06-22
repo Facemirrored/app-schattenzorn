@@ -60,11 +60,13 @@
   .news-slot {
     border: 2px solid #132428;
     background-color: rgba(13, 29, 29, 0.8);
-    color: white;
+    color: #de9c59;
+    font-weight: bold;
     margin: 100px 300px;
   }
   .news-text {
     color: white;
+    font-weight: normal;
     opacity: 1;
   }
 </style>
