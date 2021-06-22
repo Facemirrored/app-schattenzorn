@@ -2,12 +2,7 @@
   <nav class="custom-navbar navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container-fluid">
       <router-link to="/" class="navbar-brand">
-        <img
-          src="../assets/house_icon_2.png"
-          width="43"
-          height="39.6"
-          alt="Home"
-        />
+        <img src="../assets/house.svg" width="100" height="100" alt="Home" />
       </router-link>
       <button
         class="navbar-toggler"
