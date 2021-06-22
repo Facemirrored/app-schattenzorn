@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: app-schattenzorn
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: app-schattenzorn
+    spec:
+      containers:
+        - name: app-schattenzorn
+          image: registry.gitlab.com/herrmann.bjarne/app-schattenzorn
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: registry.gitlab.com
