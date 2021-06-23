@@ -1,0 +1,1 @@
+web: java -jar schattenzorn-backend/target/schattenzorn-backend-0.0.1-SNAPSHOT.jar
