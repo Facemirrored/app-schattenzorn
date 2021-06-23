@@ -99,9 +99,8 @@
               <overwrite>true</overwrite>
               <resources>
                 <resource>
-                  <directory>${project.parent.basedir}/schattenzorn-ui/target/dist</directory>
+                  <directory>${project.parent.basedir}/schattenzorn-ui/dist</directory>
                   <includes>
-                    <include>favicon.ico</include>
                     <include>assets/</include>
                     <include>static/</include>
                     <include>index.html</include>
