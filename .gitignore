@@ -5,7 +5,6 @@ target/
 ### Build Files ###
 !**/src/main/**/target/
 !**/src/test/**/target/
-**/node/
 **/resources/public/
 
 ### STS ###
