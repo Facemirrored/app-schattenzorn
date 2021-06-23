@@ -19,30 +19,27 @@
         <version>1.12.0</version>
         <executions>
           <execution>
-            <id>install node and npm</id>
+            <id>install node and yarn</id>
             <goals>
-              <goal>install-node-and-npm</goal>
+              <goal>install-node-and-yarn</goal>
             </goals>
+            <phase>package</phase>
             <configuration>
+              <installDirectory>target/</installDirectory>
               <nodeVersion>v14.17.1</nodeVersion>
+              <yarnVersion>v1.22.10</yarnVersion>
             </configuration>
           </execution>
           <execution>
-            <id>npm install</id>
+            <id>yarn install</id>
             <goals>
-              <goal>npm</goal>
+              <goal>yarn</goal>
             </goals>
+            <phase>package</phase>
             <configuration>
-              <arguments>install</arguments>
-            </configuration>
-          </execution>
-          <execution>
-            <id>npm run build</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <configuration>
-              <arguments>run build</arguments>
+              <installDirectory>target/</installDirectory>
+              <arguments>build-move-to-target</arguments>
+              <workingDirectory>${project.basedir}/</workingDirectory>
             </configuration>
           </execution>
         </executions>
