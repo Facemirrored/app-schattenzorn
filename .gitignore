@@ -1,8 +1,12 @@
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
+
+### Build Files ###
 !**/src/main/**/target/
 !**/src/test/**/target/
+**/node/
+**/resources/public/
 
 ### STS ###
 .apt_generated
