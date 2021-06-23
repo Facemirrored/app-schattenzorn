@@ -7,9 +7,6 @@ maven-build:
   image: maven:3-jdk-11
   stage: build
   script: "mvn package -B"
-  artifacts:
-    paths:
-      - schattenzorn-backend/target/*.jar
 
 maven-test:
   image: maven:3-jdk-11
