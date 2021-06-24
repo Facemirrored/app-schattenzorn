@@ -1,7 +1,13 @@
-<template>
+<template class="container">
   <div id="headline-bar" class="mb-5 row">
-    <img class="logo col-2" src="../src/assets/SchattenzornLogo.png" alt="" />
-    <h1 class="headline-text mt-5 offset-2 col-8">Schattenzorn</h1>
+    <img
+      class="logo col-4 col-sm-2 col-md-2 col-lg-2"
+      src="../src/assets/SchattenzornLogo.png"
+      alt=""
+    />
+    <h1 class="headline-text mt-5 col-8 col-sm-10 col-md-10 col-lg-10">
+      Schattenzorn
+    </h1>
   </div>
   <navbar></navbar>
   <router-view v-slot="{ Component }">
@@ -41,26 +47,80 @@
     margin-top: 20px;
     margin-right: 20px;
   }
-  .logo {
-    margin-top: 10px;
-  }
+
   .headline-text {
     color: white;
   }
+
+  @media screen and (max-width: 539px) {
+    h1 {
+      font: 600 20px "Raleway", sans-serif;
+      color: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  @media screen and (min-width: 540px) {
+    h1 {
+      font: 600 28px "Raleway", sans-serif;
+      color: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    h1 {
+      font: 600 36px "Raleway", sans-serif;
+      color: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    h1 {
+      font: 600 48px "Raleway", sans-serif;
+      color: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    h1 {
+      padding-top: 20px;
+      font: 600 60px "Raleway", sans-serif;
+      color: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    h1 {
+      padding-top: 50px;
+      font: 600 80px "Raleway", sans-serif;
+      color: rgba(0, 0, 0, 0.5);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5em;
+    }
+  }
+
   body {
     width: 100%;
     height: auto;
-    background: linear-gradient(130deg, black 20%, #045969 40%, #400504 80%)
+    background: linear-gradient(140deg, black 40%, #045969 50%, #400504 70%)
       no-repeat fixed;
   }
-  h1 {
-    color: #111;
-    font-family: Brush Script MT, Brush Script Std, cursive, sans-serif;
-    font-size: 150px;
-    font-weight: bold;
-    letter-spacing: 5px;
-    line-height: 1;
-  }
+
   p {
     color: #685206;
     font-family: "Helvetica Neue", sans-serif;
@@ -70,6 +130,7 @@
     text-align: justify;
     text-justify: inter-word;
   }
+
   .custom-fade-enter-active,
   .custom-fade-leave-active {
     transition: opacity 0.5s ease;
