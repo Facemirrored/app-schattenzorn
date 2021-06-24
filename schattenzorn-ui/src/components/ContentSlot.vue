@@ -1,5 +1,5 @@
 <template>
-  <div class="row content-slot">
+  <div class="row slot-container slot-content">
     <h2 class="text-center mt-4">{{ contentSlotItem.headline }}</h2>
     <h3 class="text-center mb-5">{{ contentSlotItem.subHeadline }}</h3>
     <div
@@ -39,18 +39,5 @@
   h4 {
     font-size: 18px;
     margin-left: 80px;
-  }
-
-  .content-slot {
-    border: 2px solid #132428;
-    background-color: rgba(13, 29, 29, 0.8);
-    color: white;
-    margin: 100px 300px;
-  }
-  .content-text {
-    margin-left: 100px;
-    margin-right: 100px;
-    color: white;
-    opacity: 1;
   }
 </style>

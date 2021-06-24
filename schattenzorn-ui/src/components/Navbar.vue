@@ -1,11 +1,18 @@
-<template>
-  <nav class="custom-navbar navbar navbar-expand-lg bg-dark navbar-dark">
+<template class="row">
+  <nav
+    class="
+      navbar navbar-expand-lg
+      col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6
+      custom-navbar
+      mx-auto
+    "
+  >
     <div class="container-fluid">
       <router-link to="/" class="navbar-brand">
-        <img src="../assets/house.svg" width="100" height="100" alt="Home" />
+        <img src="../assets/house.svg" alt="Home" />
       </router-link>
       <button
-        class="navbar-toggler"
+        class="navbar-toggler custom-toggler"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent"
@@ -18,16 +25,16 @@
 
       <div id="navbarSupportedContent" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="custom-nav-item nav-item">
+          <li class="pt-1 custom-nav-item nav-item">
             <router-link to="/about" class="nav-link active" aria-current="page"
               >Über Schattenzorn</router-link
             >
           </li>
-          <!--          <li class="nav-item">-->
-          <!--            <router-link to="/rules" class="nav-link active" aria-current="page"-->
-          <!--              >Gildenregeln</router-link-->
-          <!--            >-->
-          <!--          </li>-->
+          <li class="pt-1 custom-nav-item nav-item">
+            <router-link to="/rules" class="nav-link active" aria-current="page"
+              >Gildenregeln</router-link
+            >
+          </li>
         </ul>
       </div>
     </div>
@@ -43,14 +50,33 @@
 </script>
 
 <style>
-  .custom-navbar {
-    margin-left: 200px;
-    margin-right: 200px;
-    opacity: 0.9;
+  @media screen and (max-width: 991px) {
+    .custom-toggler .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+    }
+    .navbar-toggler {
+      border-color: rgb(255, 255, 255);
+    }
+    .custom-nav-item {
+      margin-top: 5px;
+      margin-left: 10px;
+    }
   }
 
-  .custom-nav-item {
-    border-left: 1px solid white;
-    border-right: 1px solid white;
+  @media screen {
+    .nav-link:hover {
+      color: #2c89a0;
+      opacity: 1;
+    }
+    .nav-link {
+      color: #de9c59;
+    }
+    .custom-navbar {
+      color: #de9c59;
+      opacity: 0.8;
+      background-color: rgba(13, 29, 29, 0.8);
+      border: 2px solid #132428;
+      font-weight: bold;
+    }
   }
 </style>

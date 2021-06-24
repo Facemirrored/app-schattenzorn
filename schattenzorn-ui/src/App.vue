@@ -21,18 +21,13 @@
   import { defineComponent } from "vue";
   import Navbar from "@/components/Navbar.vue";
 
-  const DEFAULT_TRANSITION = "fade";
-
   export default defineComponent({
     name: "App",
     components: {
       navbar: Navbar,
     },
     data() {
-      return {
-        prevHeight: 0,
-        transitionName: DEFAULT_TRANSITION,
-      };
+      return {};
     },
   });
 </script>
@@ -43,13 +38,20 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 1000px;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 20px;
-    margin-right: 20px;
+    margin-right: 10px;
   }
 
   .headline-text {
     color: white;
+    font-weight: bold;
+  }
+
+  .slot-text {
+    color: white;
+    font-weight: normal;
+    opacity: 1;
   }
 
   @media screen and (max-width: 539px) {
@@ -59,6 +61,28 @@
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.1em;
+    }
+    h2 {
+      color: #de9c59;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    p {
+      color: white;
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      margin: 0 0 24px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .slot-container {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 20px 0px;
+    }
+    .slot-content {
+      margin-top: 10px;
     }
   }
 
@@ -70,6 +94,24 @@
       text-transform: uppercase;
       letter-spacing: 0.5em;
     }
+    h2 {
+      color: #de9c59;
+      font-weight: bold;
+    }
+    .slot-container {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 40px 0;
+    }
+    p {
+      color: white;
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 18px;
+      line-height: 24px;
+      margin: 0 0 24px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
   }
 
   @media screen and (min-width: 768px) {
@@ -80,6 +122,27 @@
       text-transform: uppercase;
       letter-spacing: 0.5em;
     }
+    h2 {
+      color: #de9c59;
+      font-weight: bold;
+    }
+    p {
+      color: white;
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 18px;
+      line-height: 24px;
+      margin: 0 0 24px;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+    .slot-container {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 40px 60px;
+    }
+    .slot-content {
+      margin-top: 20px;
+    }
   }
 
   @media screen and (min-width: 992px) {
@@ -89,6 +152,11 @@
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.5em;
+    }
+    .slot-container {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 40px 60px;
     }
   }
 
@@ -101,6 +169,11 @@
       text-transform: uppercase;
       letter-spacing: 0.5em;
     }
+    .slot-container {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 100px 50px;
+    }
   }
 
   @media screen and (min-width: 1600px) {
@@ -112,6 +185,11 @@
       text-transform: uppercase;
       letter-spacing: 0.5em;
     }
+    .slot-container {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 100px 300px;
+    }
   }
 
   body {
@@ -119,16 +197,6 @@
     height: auto;
     background: linear-gradient(140deg, black 40%, #045969 50%, #400504 70%)
       no-repeat fixed;
-  }
-
-  p {
-    color: #685206;
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 14px;
-    line-height: 24px;
-    margin: 0 0 24px;
-    text-align: justify;
-    text-justify: inter-word;
   }
 
   .custom-fade-enter-active,
