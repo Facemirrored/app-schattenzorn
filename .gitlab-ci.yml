@@ -13,7 +13,7 @@ maven-test:
   stage: test
   script: "mvn test -B"
 
-deploy:
+production:
   stage: deploy
   image: ruby:latest
   script:
@@ -23,3 +23,14 @@ deploy:
     - dpl --provider=heroku --app=app-schattenzorn --api-key=$HEROKU_API_KEY
   only:
     - master
+
+test:
+  stage: deploy
+  image: ruby:latest
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=app-schattenzorn-test --api-key=$HEROKU_API_KEY
+  only:
+    - dev
