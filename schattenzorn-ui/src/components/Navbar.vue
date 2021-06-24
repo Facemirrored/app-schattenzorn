@@ -2,7 +2,7 @@
   <nav
     class="
       navbar navbar-expand-lg
-      col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6
+      col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8
       custom-navbar
       mx-auto
     "
