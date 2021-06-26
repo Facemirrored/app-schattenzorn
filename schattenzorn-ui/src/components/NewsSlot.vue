@@ -1,37 +1,64 @@
 <template>
-  <div class="slot-container">
-    <div class="row mt-3 mb-md-4 mb-lg-5">
-      <div class="col-12 col-md-5 col-lg-4 position-relative">
-        <div class="row">
-          <div class="col-3 col-sm-2 col-md-4">
-            <img
-              class="news-image"
-              src="../assets/ImpossibleToroidalPolyhedron.svg"
-              alt=""
-            />
-          </div>
-          <div class="col-9 col-sm-10 col-md-8 pt-3 news-date">
-            <h2 class="position-relative news-date">22 Juni</h2>
+  <div id="slot-item-wrapper">
+    <div
+      v-for="(newsItem, index) in newsSlotItems"
+      :key="index"
+      class="slot-container"
+    >
+      <div class="row mt-3 mb-md-4 mb-lg-5">
+        <div class="col-12 col-md-5 col-lg-4 position-relative">
+          <div class="row">
+            <div class="col-3 col-sm-2 col-md-4">
+              <img
+                class="news-image"
+                src="../assets/ImpossibleToroidalPolyhedron.svg"
+                alt=""
+              />
+            </div>
+            <div class="col-9 col-sm-10 col-md-8 pt-3 news-date">
+              <h2 class="position-relative news-date">{{ newsItem.date }}</h2>
+            </div>
           </div>
         </div>
+        <div class="col-12 col-md-7 col-lg-8">
+          <h3 class="ms-2 mt-3 me-3">{{ newsItem.title }}</h3>
+        </div>
       </div>
-      <div class="col-12 col-md-7 col-lg-8">
-        <h2 class="ms-2 mt-3">Homepage Erstellung</h2>
+      <hr style="color: white" />
+      <div class="row">
+        <div class="col-12">
+          <p class="ms-2 me-2 ms-md-3 me-md-3 ms-lg-5 me-lg-5">
+            {{ newsItem.content }}
+          </p>
+        </div>
       </div>
-    </div>
-    <hr style="color: white" />
-    <div class="row col-12">
-      <p class="ms-2 me-2">
-        Willkommen auf der Homepage! Diese befindet sich aktuell im Aufbau und
-        es wird versucht, diese täglich zu erweitern! :)
-      </p>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+  import { NewsSlotItem } from "@/ts/interfaces";
+
   export default {
     name: "NewsSlot",
+    data() {
+      return {
+        newsSlotItems: [
+          {
+            date: "26 Juni",
+            title: '"Über Schattenzorn" und "Gildenregeln" erstellt',
+            content:
+              "Ab jetzt besitzen wir eine schicke Übersicht aller Gildenregeln sowie die Entstehungsgeschichte!",
+          },
+          {
+            date: "22 Juni",
+            title: "Homepage Erstellung",
+            content:
+              "Willkommen auf der Homepage! Diese befindet sich aktuell im Aufbau und es wird versucht, diese täglich zu erweitern! :)",
+          },
+        ] as NewsSlotItem[],
+      };
+    },
   };
 </script>
 
@@ -70,6 +97,10 @@
   }
 
   @media screen and (min-width: 992px) {
+    #slot-item-wrapper {
+      margin-left: 200px;
+      margin-right: 200px;
+    }
     .news-image {
       position: absolute;
       left: 20px;

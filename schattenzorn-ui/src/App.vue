@@ -63,7 +63,7 @@
       letter-spacing: 0.1em;
     }
     h2 {
-      color: #de9c59;
+      color: #ffd971;
       font-weight: bold;
       font-size: 20px;
     }
@@ -127,7 +127,7 @@
       letter-spacing: 0.5em;
     }
     h2 {
-      color: #de9c59;
+      color: #ffd971;
       font-weight: bold;
     }
     h3 {
