@@ -116,6 +116,11 @@
       background-color: rgba(13, 29, 29, 0.8);
       margin: 20px 0px;
     }
+    .slot-container-small {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 40px 0;
+    }
   }
 
   @media screen and (min-width: 540px) {
@@ -140,6 +145,11 @@
       margin-bottom: 50px;
     }
     .slot-container {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 40px 0;
+    }
+    .slot-container-small {
       border: 2px solid #132428;
       background-color: rgba(13, 29, 29, 0.8);
       margin: 40px 0;
@@ -234,6 +244,11 @@
       background-color: rgba(13, 29, 29, 0.8);
       margin: 40px 60px;
     }
+    .slot-container-small {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 40px 60px;
+    }
   }
 
   @media screen and (min-width: 992px) {
@@ -248,6 +263,11 @@
       border: 2px solid #132428;
       background-color: rgba(13, 29, 29, 0.8);
       margin: 40px 60px;
+    }
+    .slot-container-small {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 40px 150px;
     }
   }
 
@@ -271,6 +291,11 @@
       border: 2px solid #132428;
       background-color: rgba(13, 29, 29, 0.8);
       margin: 100px 50px;
+    }
+    .slot-container-small {
+      border: 2px solid #132428;
+      background-color: rgba(13, 29, 29, 0.8);
+      margin: 40px 400px;
     }
   }
 

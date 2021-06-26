@@ -35,6 +35,14 @@
               >Gildenregeln</router-link
             >
           </li>
+          <li class="pt-1 custom-nav-item nav-item">
+            <router-link
+              to="/signUp"
+              class="nav-link active"
+              aria-current="page"
+              >Registrieren</router-link
+            >
+          </li>
         </ul>
       </div>
     </div>
