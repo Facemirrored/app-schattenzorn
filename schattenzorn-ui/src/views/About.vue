@@ -131,13 +131,6 @@
       text-transform: lowercase;
       text-align: center;
     }
-    li {
-      list-style-type: upper-roman;
-      color: #ffd971;
-      margin-left: 5px;
-      margin-right: 5px;
-      text-align: justify;
-    }
   }
   @media screen and (min-width: 768px) {
     .center-highlight {
@@ -151,12 +144,6 @@
       font-variant: small-caps;
       text-transform: lowercase;
       text-align: center;
-    }
-    li {
-      list-style-type: upper-roman;
-      color: #ffd971;
-      margin: 20px;
-      text-align: justify;
     }
   }
   @media screen and (min-width: 1200px) {
@@ -172,14 +159,6 @@
       text-transform: lowercase;
       text-align: center;
     }
-    li {
-      list-style-type: upper-roman;
-      color: #ffd971;
-      margin-bottom: 50px;
-      font-size: 22px;
-      text-align: justify;
-    }
-
     .list-item {
       margin-left: 50px;
       padding-left: 10px;
@@ -208,14 +187,5 @@
   }
   p:first-letter {
     text-transform: uppercase;
-  }
-  h3 {
-    text-align: center;
-    color: #ffd971;
-    font-weight: bold;
-    font-size: 26px;
-    letter-spacing: 4px;
-    margin-top: 50px;
-    margin-bottom: 50px;
   }
 </style>

@@ -68,8 +68,39 @@
       font-size: 20px;
     }
     h3 {
-      color: #de9c59;
+      text-align: center;
+      color: #ffd971;
+      font-weight: bold;
       font-size: 18px;
+      letter-spacing: 4px;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    h4 {
+      text-align: left;
+      color: #ffd971;
+      font-weight: bold;
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    h5 {
+      text-align: left;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      font-style: italic;
+      text-decoration: currentColor solid underline;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    li {
+      list-style-type: upper-roman;
+      color: #ffd971;
+      margin-left: 5px;
+      margin-right: 5px;
+      text-align: justify;
     }
     p {
       color: white;
@@ -100,8 +131,13 @@
       font-weight: bold;
     }
     h3 {
-      color: #de9c59;
+      text-align: center;
+      color: #ffd971;
+      font-weight: bold;
       font-size: 20px;
+      letter-spacing: 4px;
+      margin-top: 50px;
+      margin-bottom: 50px;
     }
     .slot-container {
       border: 2px solid #132428;
@@ -117,6 +153,25 @@
       text-align: justify;
       text-justify: inter-word;
     }
+    h4 {
+      text-align: left;
+      color: #ffd971;
+      font-weight: bold;
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    h5 {
+      text-align: left;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      font-style: italic;
+      text-decoration: currentColor solid underline;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
   }
 
   @media screen and (min-width: 768px) {
@@ -130,6 +185,40 @@
     h2 {
       color: #ffd971;
       font-weight: bold;
+    }
+    h3 {
+      text-align: center;
+      color: #ffd971;
+      font-weight: bold;
+      font-size: 26px;
+      letter-spacing: 4px;
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    h4 {
+      text-align: left;
+      color: #ffd971;
+      font-weight: bold;
+      font-size: 20px;
+      letter-spacing: 2px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    h5 {
+      text-align: left;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      font-style: italic;
+      text-decoration: currentColor solid underline;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    li {
+      list-style-type: upper-roman;
+      color: #ffd971;
+      margin: 20px;
+      text-align: justify;
     }
     p {
       color: white;
@@ -170,6 +259,13 @@
       text-align: center;
       text-transform: uppercase;
       letter-spacing: 0.5em;
+    }
+    li {
+      list-style-type: upper-roman;
+      color: #ffd971;
+      margin-bottom: 50px;
+      font-size: 22px;
+      text-align: justify;
     }
     .slot-container {
       border: 2px solid #132428;
