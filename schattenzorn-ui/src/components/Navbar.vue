@@ -69,10 +69,10 @@
       opacity: 1;
     }
     .nav-link {
-      color: #de9c59;
+      color: #ffd971;
     }
     .custom-navbar {
-      color: #de9c59;
+      color: #ffd971;
       opacity: 0.8;
       background-color: rgba(13, 29, 29, 0.8);
       border: 2px solid #132428;

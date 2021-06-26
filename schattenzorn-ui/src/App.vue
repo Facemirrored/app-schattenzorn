@@ -67,6 +67,10 @@
       font-weight: bold;
       font-size: 20px;
     }
+    h3 {
+      color: #de9c59;
+      font-size: 18px;
+    }
     p {
       color: white;
       font-family: "Helvetica Neue", sans-serif;
@@ -81,9 +85,6 @@
       background-color: rgba(13, 29, 29, 0.8);
       margin: 20px 0px;
     }
-    .slot-content {
-      margin-top: 10px;
-    }
   }
 
   @media screen and (min-width: 540px) {
@@ -97,6 +98,10 @@
     h2 {
       color: #de9c59;
       font-weight: bold;
+    }
+    h3 {
+      color: #de9c59;
+      font-size: 20px;
     }
     .slot-container {
       border: 2px solid #132428;
@@ -123,7 +128,7 @@
       letter-spacing: 0.5em;
     }
     h2 {
-      color: #de9c59;
+      color: #ffd971;
       font-weight: bold;
     }
     p {
@@ -139,9 +144,6 @@
       border: 2px solid #132428;
       background-color: rgba(13, 29, 29, 0.8);
       margin: 40px 60px;
-    }
-    .slot-content {
-      margin-top: 20px;
     }
   }
 
