@@ -5,11 +5,11 @@ import de.facemirrored.appschattenzorn.database.model.Role;
 import de.facemirrored.appschattenzorn.database.model.User;
 import de.facemirrored.appschattenzorn.database.repository.RoleRepository;
 import de.facemirrored.appschattenzorn.database.repository.UserRepository;
-import de.facemirrored.appschattenzorn.model.ui.LoginRequest;
-import de.facemirrored.appschattenzorn.model.ui.LoginResponse;
-import de.facemirrored.appschattenzorn.model.ui.SignupRequest;
-import de.facemirrored.appschattenzorn.model.ui.SignupResponse;
-import de.facemirrored.appschattenzorn.model.ui.SignupStatus;
+import de.facemirrored.appschattenzorn.model.ui.SignInRequest;
+import de.facemirrored.appschattenzorn.model.ui.SignInResponse;
+import de.facemirrored.appschattenzorn.model.ui.SignUpRequest;
+import de.facemirrored.appschattenzorn.model.ui.SignUpResponse;
+import de.facemirrored.appschattenzorn.model.ui.SignUpStatus;
 import de.facemirrored.appschattenzorn.security.services.UserDetailsImpl;
 import de.facemirrored.appschattenzorn.security.services.authtokenfilter.JwtUtils;
 import java.util.HashSet;
@@ -59,12 +59,12 @@ public class AuthController {
     this.jwtUtils = jwtUtils;
   }
 
-  @PostMapping
-  public ResponseEntity<LoginResponse> authenticateUser(
-      @Valid @RequestBody LoginRequest loginRequest) {
+  @PostMapping(path = "/signIn", consumes = "application/json", produces = "application/json")
+  public ResponseEntity<SignInResponse> authenticateUser(
+      @Valid @RequestBody SignInRequest signInRequest) {
     var authentication = authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
-            loginRequest.getPassword()));
+        new UsernamePasswordAuthenticationToken(signInRequest.getUsername(),
+            signInRequest.getPassword()));
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
@@ -74,7 +74,7 @@ public class AuthController {
         .map(GrantedAuthority::getAuthority)
         .collect(Collectors.toList());
 
-    return ResponseEntity.ok(LoginResponse.builder()
+    return ResponseEntity.ok(SignInResponse.builder()
         .token(jwt)
         .id(userDetails.getId())
         .username(userDetails.getUsername())
@@ -83,20 +83,20 @@ public class AuthController {
         .build());
   }
 
-  @PostMapping("/signup")
-  public ResponseEntity<SignupResponse> registerUser(@Valid @RequestBody
-      SignupRequest signUpRequest) {
+  @PostMapping("/signUp")
+  public ResponseEntity<SignUpResponse> registerUser(@Valid @RequestBody
+      SignUpRequest signUpRequest) {
 
     if (Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
       return ResponseEntity
           .badRequest()
-          .body(new SignupResponse(SignupStatus.FAILED_EMAIL_TAKEN));
+          .body(new SignUpResponse(SignUpStatus.FAILED_EMAIL_TAKEN));
     }
 
     if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
       return ResponseEntity
           .badRequest()
-          .body(new SignupResponse(SignupStatus.FAILED_USERNAME_TAKEN));
+          .body(new SignUpResponse(SignUpStatus.FAILED_USERNAME_TAKEN));
     }
 
     // Create new user's account
@@ -138,6 +138,6 @@ public class AuthController {
     user.setRoles(roles);
     userRepository.save(user);
 
-    return ResponseEntity.ok(new SignupResponse(SignupStatus.SUCCESS));
+    return ResponseEntity.ok(new SignUpResponse(SignUpStatus.SUCCESS));
   }
 }

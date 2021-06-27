@@ -1,20 +1,20 @@
 import axios from "axios";
+import { SignUpStatus, User } from "@/store/auth/interfaces";
 
 const API_URL = "http://localhost:8080/api/auth";
 
 class AuthService {
   login(username: string, password: string) {
     return axios
-      .post(API_URL + "signin", {
+      .post(API_URL + "signIn", {
         username,
         password,
       })
       .then((response) => {
-        if (response.data.accessToken) {
+        if (response.data.token) {
           localStorage.setItem("user", JSON.stringify(response.data));
         }
-
-        return response.data;
+        return Promise.resolve(response.data as User);
       });
   }
 
@@ -22,12 +22,16 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  register(username: string, email: string, password: string) {
-    return axios.post(API_URL + "signup", {
-      username,
-      email,
-      password,
-    });
+  register(user: User) {
+    return axios
+      .post(API_URL + "signUp", {
+        username: user.username,
+        email: user.email,
+        password: user.password,
+      })
+      .then((response) => {
+        return Promise.resolve(response.data as SignUpStatus);
+      });
   }
 }
 

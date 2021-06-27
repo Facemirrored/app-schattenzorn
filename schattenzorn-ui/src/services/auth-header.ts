@@ -1,10 +1,12 @@
+import { User } from "@/store/auth/interfaces";
+
 export default function authHeader() {
   const storedUser = localStorage.getItem("user");
-  const user = JSON.parse(storedUser ? storedUser : "");
+  const user = JSON.parse(storedUser ? storedUser : "") as User;
 
-  if (user && user.accessToken) {
-    return { Authorization: "User " + user.accessToken };
+  if (user && user.token) {
+    return { Authorization: "User " + user.token };
   } else {
-    return {};
+    return undefined;
   }
 }

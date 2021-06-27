@@ -1,6 +1,6 @@
 package de.facemirrored.appschattenzorn.model.ui;
 
-public enum SignupStatus {
+public enum SignUpStatus {
 
   SUCCESS("SUCCESS"),
   FAILED_EMAIL_TAKEN("FAILED_EMAIL_TAKEN"),
@@ -10,7 +10,7 @@ public enum SignupStatus {
 
   private final String status;
 
-  SignupStatus(String status) {
+  SignUpStatus(String status) {
     this.status = status;
   }
 

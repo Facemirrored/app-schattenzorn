@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class LoginRequest {
+public class SignInRequest {
 
   private static final long serialVersionUID = -6662800587812474376L;
 

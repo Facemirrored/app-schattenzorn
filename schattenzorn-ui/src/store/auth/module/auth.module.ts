@@ -8,8 +8,12 @@ import { Store as VuexStore } from "vuex";
 
 // initial state
 export const state: AuthStateTypes = {
-  user: undefined,
-  token: "",
+  user: {
+    username: "test",
+    password: "test",
+    email: "test",
+    token: "",
+  },
   loggedIn: false,
 };
 

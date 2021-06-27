@@ -50,10 +50,15 @@
 </template>
 
 <script lang="ts">
+  import { useStore } from "vuex";
+  import { computed } from "vue";
+
   export default {
     name: "SignUp",
-    data() {
-      return {};
+    setup(props, context) {
+      const store = useStore();
+      // current user
+      const user = computed(() => store.getters.getUser);
     },
   };
 </script>

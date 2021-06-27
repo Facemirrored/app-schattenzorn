@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SignupRequest {
+public class SignUpRequest {
 
   private static final long serialVersionUID = -8398323363172976070L;
 

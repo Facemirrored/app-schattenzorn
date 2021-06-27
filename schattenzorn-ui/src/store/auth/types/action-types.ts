@@ -1,3 +1,5 @@
 export enum ActionTypes {
-  REGISTER_USER = "REGISTER_USER",
+  SIGN_UP = "SIGN_UP",
+  SIGN_IN = "SIGN_IN",
+  LOGOUT = "LOGOUT",
 }

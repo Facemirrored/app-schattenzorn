@@ -8,13 +8,13 @@ import lombok.RequiredArgsConstructor;
 @Data
 @Builder
 @RequiredArgsConstructor
-public class SignupResponse {
+public class SignUpResponse {
 
   private static final long serialVersionUID = -4422169581228686255L;
 
-  public SignupResponse(SignupStatus signupStatus) {
+  public SignUpResponse(SignUpStatus signupStatus) {
     this.signupStatus = signupStatus;
   }
 
-  private SignupStatus signupStatus;
+  private SignUpStatus signupStatus;
 }
