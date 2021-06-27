@@ -8,11 +8,11 @@
     <form class="mb-5">
       <div class="row ms-2 me-2 mb-4 justify-content-center">
         <div class="col-12 col-md-2 me-md-4">
-          <label for="signUpUsername" class="col-form-label">Username:</label>
+          <label for="username" class="col-form-label">Username:</label>
         </div>
         <div class="col-12 col-md-4">
           <input
-            id="signUpUsername"
+            id="username"
             type="text"
             class="form-control custom-input"
             aria-describedby="usernameHelp"
@@ -21,27 +21,27 @@
       </div>
       <div class="row ms-2 me-2 mb-4 justify-content-center">
         <div class="col-12 col-md-2 me-md-4">
-          <label for="signUpPassword" class="col-form-label">Password:</label>
+          <label for="email" class="col-form-label">Email:</label>
         </div>
         <div class="col-12 col-md-4">
           <input
-            id="signUpPassword"
-            type="password"
+            id="email"
+            type="text"
             class="form-control custom-input"
-            aria-describedby="userPasswordHelp"
+            aria-describedby="userEmailHelp"
           />
         </div>
       </div>
       <div class="row ms-2 me-2 mb-4 justify-content-center">
         <div class="col-12 col-md-2 me-md-4">
-          <label for="signUpEmail" class="col-form-label">Email:</label>
+          <label for="password" class="col-form-label">Password:</label>
         </div>
         <div class="col-12 col-md-4">
           <input
-            id="signUpEmail"
-            type="text"
+            id="password"
+            type="password"
             class="form-control custom-input"
-            aria-describedby="userEmailHelp"
+            aria-describedby="userPasswordHelp"
           />
         </div>
       </div>
@@ -53,9 +53,7 @@
   export default {
     name: "SignUp",
     data() {
-      return {
-        username: "",
-      };
+      return {};
     },
   };
 </script>
