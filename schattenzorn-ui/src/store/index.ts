@@ -1,9 +1,10 @@
 import { createStore } from "vuex";
+import { AuthModule } from "@/store/auth/module/auth.module";
 
-import Auth from "./auth/auth.module";
-
-export const store = createStore({
+export const state = createStore({
   modules: {
-    Auth,
+    AuthModule,
   },
 });
+
+export type State = typeof state;
