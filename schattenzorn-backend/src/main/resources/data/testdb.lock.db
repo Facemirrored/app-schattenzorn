@@ -1,6 +1,6 @@
 #FileLock
-#Sun Jun 27 14:09:30 CEST 2021
-server=192.168.0.90\:61073
+#Sun Jun 27 14:30:09 CEST 2021
+server=192.168.0.90\:55941
 hostName=Herrmann
 method=file
-id=17a4d5fe7ac44824f1a5bde27d0add6febbc71a54fe
+id=17a4d72cebb1a1dcd152d0f8e40f480c512fb24cfe1
