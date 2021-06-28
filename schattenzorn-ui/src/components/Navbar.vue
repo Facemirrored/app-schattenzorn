@@ -68,11 +68,19 @@
                 >Einloggen</router-link
               >
               <router-link
-                v-else
+                v-if="loggedIn"
                 to="/profile"
                 class="nav-link custom-nav-item dropdown-item"
                 aria-current="page"
                 >Profil</router-link
+              >
+              <router-link
+                v-if="loggedIn"
+                to="/"
+                class="nav-link custom-nav-item dropdown-item"
+                aria-current="page"
+                @click="logoutAction"
+                >Logout</router-link
               >
             </ul>
           </li>
@@ -86,13 +94,16 @@
   import { useStore } from "vuex";
   import { computed } from "vue";
   import router from "@/router/router";
+  import { ActionTypes } from "@/store/auth/types/action-types";
 
   export default {
     setup() {
       const store = useStore();
-      const loggedIn = computed(() => store.getters.getLoginStatus).value;
       return {
-        loggedIn,
+        // login state from store
+        loggedIn: computed(() => store.getters.getLoginStatus),
+        // logout action from store
+        logoutAction: () => store.dispatch(ActionTypes.LOGOUT),
       };
     },
   };

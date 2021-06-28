@@ -31,11 +31,9 @@
     name: "Profile",
     setup() {
       const store = useStore();
-      // user from store
-      const user = computed(() => store.getters.getUser).value as User;
-
       return {
-        user,
+        // user from store
+        user: computed(() => store.getters.getUser) as User,
       };
     },
   };

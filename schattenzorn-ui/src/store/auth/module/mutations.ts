@@ -21,6 +21,7 @@ export const mutations: MutationTree<AuthStateTypes> & Mutations = {
   },
   [MutationTypes.LOGOUT](state) {
     state.user = undefined;
+    state.token = "";
     state.loggedIn = false;
   },
   [MutationTypes.REGISTER_SUCCESS](state) {
