@@ -8,7 +8,7 @@ target/
 **/resources/public/
 
 ### Local test db ###
-/resources/data/
+**/data/
 
 ### STS ###
 .apt_generated
