@@ -9,8 +9,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@vuelidate/core": "^2.0.0-alpha.19",
+    "@vuelidate/validators": "^2.0.0-alpha.17",
+    "axios": "^0.21.1",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.10"
+    "vue-router": "^4.0.10",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@types/node": "^15.12.4",
@@ -26,6 +30,7 @@
     "prettier": "^2.3.0",
     "typescript": "^4.3.2",
     "vite": "^2.3.4",
-    "vue-tsc": "^0.0.24"
+    "vue-tsc": "^0.0.24",
+    "vuex-module-decorators": "^1.0.1"
   }
 }

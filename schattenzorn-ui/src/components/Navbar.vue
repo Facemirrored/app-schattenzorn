@@ -2,7 +2,7 @@
   <nav
     class="
       navbar navbar-expand-lg
-      col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8
+      col-12 col-sm-12 col-md-10 col-lg-8
       custom-navbar
       mx-auto
     "
@@ -24,7 +24,7 @@
       </button>
 
       <div id="navbarSupportedContent" class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
           <li class="pt-1 custom-nav-item nav-item">
             <router-link to="/about" class="nav-link active" aria-current="page"
               >Über Schattenzorn</router-link
@@ -36,15 +36,75 @@
             >
           </li>
         </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="pt-1 custom-nav-item nav-item dropdown">
+            <a
+              id="navbarDropdown"
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Account
+            </a>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown"
+              style="background-color: rgba(13, 29, 29, 1)"
+            >
+              <router-link
+                v-if="!loggedIn"
+                to="/signUp"
+                class="nav-link custom-nav-item dropdown-item"
+                aria-current="page"
+                >Registrieren</router-link
+              >
+              <router-link
+                v-if="!loggedIn"
+                to="/signIn"
+                class="nav-link custom-nav-item dropdown-item"
+                aria-current="page"
+                >Einloggen</router-link
+              >
+              <router-link
+                v-if="loggedIn"
+                to="/profile"
+                class="nav-link custom-nav-item dropdown-item"
+                aria-current="page"
+                >Profil</router-link
+              >
+              <router-link
+                v-if="loggedIn"
+                to="/"
+                class="nav-link custom-nav-item dropdown-item"
+                aria-current="page"
+                @click="logoutAction"
+                >Logout</router-link
+              >
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
 </template>
 
 <script lang="ts">
+  import { useStore } from "vuex";
+  import { computed } from "vue";
+  import router from "@/router/router";
+  import { ActionTypes } from "@/store/auth/types/action-types";
+
   export default {
     setup() {
-      return {};
+      const store = useStore();
+      return {
+        // login state from store
+        loggedIn: computed(() => store.getters.getLoginStatus),
+        // logout action from store
+        logoutAction: () => store.dispatch(ActionTypes.LOGOUT),
+      };
     },
   };
 </script>

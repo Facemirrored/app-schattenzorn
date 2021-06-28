@@ -3,7 +3,7 @@
     <div
       v-for="(newsItem, index) in newsSlotItems"
       :key="index"
-      class="slot-container"
+      class="slot-container-small"
     >
       <div class="row mt-3 mb-md-4 mb-lg-5">
         <div class="col-12 col-md-5 col-lg-4 position-relative">
@@ -97,10 +97,6 @@
   }
 
   @media screen and (min-width: 992px) {
-    #slot-item-wrapper {
-      margin-left: 200px;
-      margin-right: 200px;
-    }
     .news-image {
       position: absolute;
       left: 20px;

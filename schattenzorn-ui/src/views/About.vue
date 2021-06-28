@@ -118,7 +118,7 @@
 </script>
 
 <style scoped>
-  @media screen and (max-width: 539px) {
+  @media screen and (max-width: 767px) {
     .center-highlight {
       font-family: "Adobe Caslon Pro", "Hoefler Text", Georgia, Garamond, Times,
         serif;

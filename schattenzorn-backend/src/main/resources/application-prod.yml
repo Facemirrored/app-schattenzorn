@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+
+# App Properties
+facemirrored:
+  app:
+    schattenzorn:
+      issuer: "facemirroredSecKey"
+      jwtExpirationMs: 86400000

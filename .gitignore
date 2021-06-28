@@ -7,8 +7,8 @@ target/
 !**/src/test/**/target/
 **/resources/public/
 
-### Local Database ###
-/resources/data/
+### Local test db ###
+**/data/
 
 ### STS ###
 .apt_generated
