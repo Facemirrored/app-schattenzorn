@@ -6,11 +6,14 @@ import {
   SignUpRequest,
   SignUpStatus,
   SignUpResponse,
+  User,
+  HeaderAuth,
 } from "@/store/auth/interfaces";
 import { ActionContext, ActionTree } from "vuex";
 import { Mutations } from "@/store/auth/module/mutations";
 import { IRootState } from "@/store/interfaces";
 import AuthService from "@/services/AuthService";
+import { userSession } from "@/services/auth-header";
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(
@@ -20,6 +23,7 @@ type AugmentedActionContext = {
 } & Omit<ActionContext<AuthStateTypes, IRootState>, "commit">;
 
 export interface Actions {
+  [ActionTypes.LOAD_COOKIE_USER]({ commit }: AugmentedActionContext): void;
   [ActionTypes.SIGN_UP](
     { commit }: AugmentedActionContext,
     payload: SignUpRequest,
@@ -34,6 +38,12 @@ export interface Actions {
 }
 
 export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
+  [ActionTypes.LOAD_COOKIE_USER]({ commit }) {
+    const headerAuth: HeaderAuth | undefined = userSession();
+    if (headerAuth) {
+      commit(MutationTypes.SET_USER, headerAuth);
+    }
+  },
   [ActionTypes.SIGN_UP]({ commit }, payload: SignUpRequest) {
     return AuthService.register(payload)
       .then((signUpStatus: SignUpResponse) => {

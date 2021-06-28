@@ -1,12 +1,29 @@
-import { HeaderAuth } from "@/store/auth/interfaces";
+import { HeaderAuth, User } from "@/store/auth/interfaces";
+import { getCookie } from "@/ts/cookie-typescript-utils";
+import { Cookies } from "@/ts/interfaces";
 
-export default function authHeader() {
-  const storedUser = localStorage.getItem("AuthState");
-  const authState = JSON.parse(storedUser ? storedUser : "") as HeaderAuth;
+function getHeader(): HeaderAuth | undefined {
+  const storedUser = getCookie(Cookies.AUTH_STATE);
+  if (storedUser) {
+    return JSON.parse(storedUser) as HeaderAuth;
+  }
+  return undefined;
+}
+
+export function authHeader(): unknown | undefined {
+  const authState = getHeader();
 
   if (authState && authState.token) {
     return { Authorization: "Bearer " + authState.token };
-  } else {
-    return undefined;
   }
+  return undefined;
+}
+
+export function userSession(): HeaderAuth | undefined {
+  const authState = getHeader();
+
+  if (authState && authState) {
+    return authState;
+  }
+  return undefined;
 }

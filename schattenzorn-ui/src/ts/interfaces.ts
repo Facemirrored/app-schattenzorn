@@ -14,3 +14,8 @@ export interface NewsSlotItem {
   content: string;
   date: string;
 }
+
+export enum Cookies {
+  AUTH_STATE = "AUTH_STATE",
+  LOGGED_IN = "LOGGED_IN",
+}

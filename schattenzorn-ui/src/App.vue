@@ -20,14 +20,19 @@
 <script lang="ts">
   import { defineComponent } from "vue";
   import Navbar from "@/components/Navbar.vue";
+  import { userSession } from "@/services/auth-header";
+  import { User } from "@/store/auth/interfaces";
+  import { useStore } from "vuex";
+  import { ActionTypes } from "@/store/auth/types/action-types";
 
   export default defineComponent({
     name: "App",
     components: {
       navbar: Navbar,
     },
-    data() {
-      return {};
+    setup() {
+      const store = useStore();
+      store.dispatch(ActionTypes.LOAD_COOKIE_USER);
     },
   });
 </script>

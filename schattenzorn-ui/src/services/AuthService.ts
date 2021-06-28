@@ -4,8 +4,9 @@ import {
   SignInResponse,
   SignUpRequest,
   SignUpResponse,
-  User,
 } from "@/store/auth/interfaces";
+import { deleteCookie, setCookie } from "@/ts/cookie-typescript-utils";
+import { Cookies } from "@/ts/interfaces";
 
 const API_URL = "http://localhost:8080/api/auth/";
 
@@ -18,14 +19,14 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.token) {
-          localStorage.setItem("AuthState", JSON.stringify(response.data));
+          setCookie(Cookies.AUTH_STATE, JSON.stringify(response.data));
         }
         return Promise.resolve(response.data as SignInResponse);
       });
   }
 
   logout() {
-    localStorage.removeItem("AuthState");
+    deleteCookie(Cookies.AUTH_STATE);
   }
 
   register(signUpRequest: SignUpRequest) {
