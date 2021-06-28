@@ -5,11 +5,11 @@ import de.facemirrored.appschattenzorn.database.model.Role;
 import de.facemirrored.appschattenzorn.database.model.User;
 import de.facemirrored.appschattenzorn.database.repository.RoleRepository;
 import de.facemirrored.appschattenzorn.database.repository.UserRepository;
-import de.facemirrored.appschattenzorn.model.ui.SignInRequest;
-import de.facemirrored.appschattenzorn.model.ui.SignInResponse;
-import de.facemirrored.appschattenzorn.model.ui.SignUpRequest;
-import de.facemirrored.appschattenzorn.model.ui.SignUpResponse;
-import de.facemirrored.appschattenzorn.model.ui.SignUpStatus;
+import de.facemirrored.appschattenzorn.rest.SignInRequest;
+import de.facemirrored.appschattenzorn.rest.SignInResponse;
+import de.facemirrored.appschattenzorn.rest.SignUpRequest;
+import de.facemirrored.appschattenzorn.rest.SignUpResponse;
+import de.facemirrored.appschattenzorn.rest.model.SignUpStatus;
 import de.facemirrored.appschattenzorn.security.services.UserDetailsImpl;
 import de.facemirrored.appschattenzorn.security.services.authtokenfilter.JwtUtils;
 import java.util.HashSet;
@@ -76,10 +76,9 @@ public class AuthController {
 
     return ResponseEntity.ok(SignInResponse.builder()
         .token(jwt)
-        .id(userDetails.getId())
-        .username(userDetails.getUsername())
-        .email(userDetails.getEmail())
-        .role(roles)
+        .user(de.facemirrored.appschattenzorn.rest.model.User.builder()
+            .username(userDetails.getUsername()).email(userDetails.getEmail()).roles(roles)
+            .build())
         .build());
   }
 
@@ -93,47 +92,24 @@ public class AuthController {
           .body(new SignUpResponse(SignUpStatus.FAILED_EMAIL_TAKEN));
     }
 
-    if (Boolean.TRUE.equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
+    if (Boolean.TRUE
+        .equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
       return ResponseEntity
           .badRequest()
           .body(new SignUpResponse(SignUpStatus.FAILED_USERNAME_TAKEN));
     }
 
+    // TODO: extract to Service
     // Create new user's account
     var user = new User(signUpRequest.getUsername(),
         signUpRequest.getEmail(),
         encoder.encode(signUpRequest.getPassword()));
 
-    Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
-
-    if (strRoles == null) {
-      // TODO: DataNotFoundException (RuntimeException) with ControllerAdvise
-      Role userRole = roleRepository.findByName(ERole.ROLE_USER)
-          .orElseThrow(() -> new RuntimeException("Error: Role 'USER' is not found."));
-      roles.add(userRole);
-    } else {
-      strRoles.forEach(role -> {
-        switch (role) {
-          case "admin":
-            var adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
-                .orElseThrow(() -> new RuntimeException("Error: Role 'ADMIN' is not found."));
-            roles.add(adminRole);
-
-            break;
-          case "mod":
-            var modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
-                .orElseThrow(() -> new RuntimeException("Error: Role 'MODERATOR' is not found."));
-            roles.add(modRole);
-
-            break;
-          default:
-            var userRole = roleRepository.findByName(ERole.ROLE_USER)
-                .orElseThrow(() -> new RuntimeException("Error: Role 'USER' is not found."));
-            roles.add(userRole);
-        }
-      });
-    }
+    // TODO: DataNotFoundException (RuntimeException) with ControllerAdvise
+    final var userRole = roleRepository.findByName(ERole.ROLE_USER)
+        .orElseThrow(() -> new RuntimeException("Error: Role 'USER' is not found."));
+    roles.add(userRole);
 
     user.setRoles(roles);
     userRepository.save(user);

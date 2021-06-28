@@ -2,8 +2,11 @@ package de.facemirrored.appschattenzorn.security.services.authtokenfilter;
 
 
 import de.facemirrored.appschattenzorn.security.services.UserDetailsImpl;
+import io.jsonwebtoken.security.Keys;
+import java.security.Key;
 import java.util.Date;
 
+import javax.crypto.SecretKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,10 +17,13 @@ import io.jsonwebtoken.*;
 
 @Component
 public class JwtUtils {
+
   private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-  @Value("${facemirrored.app.schattenzorn.jwtSecret}")
-  private String jwtSecret;
+  @Value("${facemirrored.app.schattenzorn.issuer}")
+  private String issuer;
+
+  private SecretKey secret;
 
   @Value("${facemirrored.app.schattenzorn.jwtExpirationMs}")
   private int jwtExpirationMs;
@@ -26,24 +32,30 @@ public class JwtUtils {
 
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
+    this.secret = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+
     return Jwts.builder()
         .setSubject((userPrincipal.getUsername()))
+        .setIssuer(this.issuer)
         .setIssuedAt(new Date())
         .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-        .signWith(SignatureAlgorithm.HS512, jwtSecret)
+        .signWith(this.secret)
         .compact();
   }
 
   public String getUserNameFromJwtToken(String token) {
-    return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+    return Jwts.parserBuilder().setSigningKey(this.secret)
+        .requireIssuer(this.issuer).build().parseClaimsJws(token).getBody()
+        .getSubject();
+    // return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
   }
 
   public boolean validateJwtToken(String authToken) {
     try {
-      Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+      Jwts.parserBuilder().setSigningKey(this.secret).requireIssuer(this.issuer)
+          .build().parseClaimsJws(authToken);
+      // Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
       return true;
-    } catch (SignatureException e) {
-      logger.error("Invalid JWT signature: {}", e.getMessage());
     } catch (MalformedJwtException e) {
       logger.error("Invalid JWT token: {}", e.getMessage());
     } catch (ExpiredJwtException e) {

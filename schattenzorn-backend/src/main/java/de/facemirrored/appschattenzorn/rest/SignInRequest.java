@@ -1,6 +1,5 @@
-package de.facemirrored.appschattenzorn.model.ui;
+package de.facemirrored.appschattenzorn.rest;
 
-import javax.validation.constraints.NotBlank;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,9 +9,7 @@ public class SignInRequest {
 
   private static final long serialVersionUID = -6662800587812474376L;
 
-  @NotBlank
   private String username;
 
-  @NotBlank
   private String password;
 }

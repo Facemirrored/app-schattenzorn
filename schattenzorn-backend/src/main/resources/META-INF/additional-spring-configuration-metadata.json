@@ -1,13 +1,13 @@
 {
   "properties": [
     {
-      "name": "facemirrored.app.schattenzorn.jwtSecret",
-      "type": "java.lang.String",
-      "description": "Description for facemirrored.app.schattenzorn.jwtSecret."
-    },
-    {
       "name": "facemirrored.app.schattenzorn.jwtExpirationMs",
       "type": "java.lang.String",
-      "description": "Description for facemirrored.app.schattenzorn.jwtExpirationMs."
+      "description": "Expiration in MS for JWT token."
+    },
+    {
+      "name": "facemirrored.app.schattenzorn.issuer",
+      "type": "java.lang.String",
+      "description": "Issuer for jwt token."
     }
   ] }

@@ -1,11 +1,11 @@
-import { User } from "@/store/auth/interfaces";
+import { HeaderAuth } from "@/store/auth/interfaces";
 
 export default function authHeader() {
-  const storedUser = localStorage.getItem("user");
-  const user = JSON.parse(storedUser ? storedUser : "") as User;
+  const storedUser = localStorage.getItem("AuthState");
+  const authState = JSON.parse(storedUser ? storedUser : "") as HeaderAuth;
 
-  if (user && user.token) {
-    return { Authorization: "User " + user.token };
+  if (authState && authState.token) {
+    return { Authorization: "Bearer " + authState.token };
   } else {
     return undefined;
   }

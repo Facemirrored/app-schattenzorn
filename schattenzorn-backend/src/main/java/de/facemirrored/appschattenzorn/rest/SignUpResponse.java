@@ -1,6 +1,7 @@
-package de.facemirrored.appschattenzorn.model.ui;
+package de.facemirrored.appschattenzorn.rest;
 
 
+import de.facemirrored.appschattenzorn.rest.model.SignUpStatus;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

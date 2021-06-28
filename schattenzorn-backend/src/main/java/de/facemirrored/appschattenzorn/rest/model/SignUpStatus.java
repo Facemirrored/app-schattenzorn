@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.model.ui;
+package de.facemirrored.appschattenzorn.rest.model;
 
 public enum SignUpStatus {
 

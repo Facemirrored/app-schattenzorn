@@ -1,5 +1,4 @@
 export enum MutationTypes {
-  SET_USER = "SET_USER",
   LOGIN_SUCCESS = "LOGIN_SUCCESS",
   LOGIN_FAILURE = "LOGIN_FAILURE",
   LOGOUT = "LOGOUT",

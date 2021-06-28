@@ -9,12 +9,12 @@ import { Store as VuexStore } from "vuex";
 // initial state
 export const state: AuthStateTypes = {
   user: {
-    username: "test",
-    password: "test",
-    email: "test",
-    token: "",
+    username: "",
+    email: "",
+    roles: [],
   },
   loggedIn: false,
+  token: "",
 };
 
 export type Store<S = AuthStateTypes> = Omit<

@@ -4,7 +4,6 @@ package de.facemirrored.appschattenzorn.security.services;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.facemirrored.appschattenzorn.database.model.User;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -15,14 +14,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
 
-  private Long id;
+  private final Long id;
 
-  private String username;
+  private final String username;
 
-  private String email;
+  private final String email;
 
   @JsonIgnore
-  private String password;
+  private final String password;
 
   private final Collection<? extends GrantedAuthority> authorities;
 

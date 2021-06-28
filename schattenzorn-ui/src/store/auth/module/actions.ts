@@ -2,9 +2,10 @@ import { ActionTypes } from "@/store/auth/types/action-types";
 import { MutationTypes } from "@/store/auth/types/mutation-types";
 import {
   AuthStateTypes,
-  SignUpState,
+  SignInRequest,
+  SignUpRequest,
   SignUpStatus,
-  User,
+  SignUpResponse,
 } from "@/store/auth/interfaces";
 import { ActionContext, ActionTree } from "vuex";
 import { Mutations } from "@/store/auth/module/mutations";
@@ -21,20 +22,22 @@ type AugmentedActionContext = {
 export interface Actions {
   [ActionTypes.SIGN_UP](
     { commit }: AugmentedActionContext,
-    payload: User,
-  ): Promise<SignUpStatus>;
+    payload: SignUpRequest,
+  ): Promise<SignUpResponse>;
+
   [ActionTypes.SIGN_IN](
     { commit }: AugmentedActionContext,
-    payload: { username: string; password: string },
-  ): Promise<User>;
+    payload: SignInRequest,
+  ): Promise<void>;
+
   [ActionTypes.LOGOUT]({ commit }: AugmentedActionContext): void;
 }
 
 export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
-  [ActionTypes.SIGN_UP]({ commit }, payload: User) {
+  [ActionTypes.SIGN_UP]({ commit }, payload: SignUpRequest) {
     return AuthService.register(payload)
-      .then((signUpStatus: SignUpStatus) => {
-        if (signUpStatus.signupState === SignUpState.SUCCESS) {
+      .then((signUpStatus: SignUpResponse) => {
+        if (signUpStatus.signupStatus === SignUpStatus.SUCCESS) {
           commit(MutationTypes.REGISTER_SUCCESS, undefined);
         } else {
           commit(MutationTypes.REGISTER_FAILURE, undefined);
@@ -46,14 +49,11 @@ export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
         return Promise.reject(error);
       });
   },
-  [ActionTypes.SIGN_IN](
-    { commit },
-    payload: { username: string; password: string },
-  ) {
-    return AuthService.login(payload.username, payload.password)
-      .then((user) => {
-        commit(MutationTypes.LOGIN_SUCCESS, user);
-        return Promise.resolve(user);
+  [ActionTypes.SIGN_IN]({ commit }, payload: SignInRequest) {
+    return AuthService.login(payload)
+      .then((data) => {
+        commit(MutationTypes.LOGIN_SUCCESS, data);
+        return Promise.resolve();
       })
       .catch((error) => {
         console.log("error request login: ", error);

@@ -13,7 +13,7 @@
         <div class="col-12 col-md-4">
           <input
             id="username"
-            v-model="user.username"
+            v-model="state.signUpRequest.username"
             type="text"
             class="form-control custom-input"
             aria-describedby="usernameHelp"
@@ -31,7 +31,7 @@
         <div class="col-12 col-md-4">
           <input
             id="email"
-            v-model="user.email"
+            v-model="state.signUpRequest.email"
             type="text"
             class="form-control custom-input"
             aria-describedby="userEmailHelp"
@@ -49,7 +49,7 @@
         <div class="col-12 col-md-4">
           <input
             id="password"
-            v-model="user.password"
+            v-model="state.signUpRequest.password"
             type="password"
             class="form-control custom-input"
             aria-describedby="userPasswordHelp"
@@ -63,10 +63,10 @@
       <div class="form-group row ms-2 me-2 mb-4 justify-content-center">
         <button
           class="col-12 col-md-4 btn btn-primary btn-block"
-          :disabled="loading"
+          :disabled="state.loading"
         >
           <span
-            v-show="loading"
+            v-show="state.loading"
             class="spinner-border spinner-border-sm"
           ></span>
           Jetzt Registrieren!
@@ -80,7 +80,11 @@
   import { useStore } from "vuex";
   import { computed, reactive } from "vue";
   import router from "@/router/router";
-  import { SignUpState, SignUpStatus, User } from "@/store/auth/interfaces";
+  import {
+    SignUpStatus,
+    SignUpResponse,
+    SignUpRequest,
+  } from "@/store/auth/interfaces";
   import { ActionTypes } from "@/store/auth/types/action-types";
   import useVuelidate from "@vuelidate/core";
   import {
@@ -91,6 +95,7 @@
     required,
   } from "@vuelidate/validators";
 
+  // TODO: registrationMessage ausgeben wenn allg. Fehler oder fachl. Fehler
   export default {
     name: "SignUp",
     setup() {
@@ -100,12 +105,16 @@
         router.push("/profile");
       }
       // data
-      const user = reactive({
-        username: "",
-        password: "",
-        email: "",
-        token: "",
-      } as User);
+      const state = reactive({
+        signUpRequest: {
+          username: "",
+          email: "",
+          password: "",
+        } as SignUpRequest,
+        registrationState: {} as SignUpStatus,
+        loading: false,
+        registrationMessage: "",
+      });
       // vuelidate
       const rules = {
         username: {
@@ -124,52 +133,49 @@
           max: helpers.withMessage(() => "Maximal 50 Zeichen", maxLength(50)),
         },
       };
-      const v$ = useVuelidate(rules, user);
+      const v$ = useVuelidate(rules, state.signUpRequest);
       // registration event
-      let registrationState: SignUpState = undefined;
-      let loading = false;
-      let registrationMessage: string;
-      const handleRegistration = (user: User) => {
-        loading = true;
+      const handleRegistration = () => {
+        state.loading = true;
         store
-          .dispatch(ActionTypes.SIGN_UP, user)
-          .then((signUpStatus: SignUpStatus) => {
-            registrationState = signUpStatus.signupState;
-            if (registrationState === SignUpState.SUCCESS) {
-              registrationMessage =
+          .dispatch(ActionTypes.SIGN_UP, state.signUpRequest)
+          .then((signUpResponse: SignUpResponse) => {
+            state.registrationState = signUpResponse.signupStatus;
+            if (state.registrationState === SignUpStatus.SUCCESS) {
+              state.registrationMessage =
                 "Du wurdest soeben erfolgreich registriert!";
-            } else if (registrationState === SignUpState.FAILED_EMAIL_TAKEN) {
-              registrationMessage =
+            } else if (
+              state.registrationState === SignUpStatus.FAILED_EMAIL_TAKEN
+            ) {
+              state.registrationMessage =
                 "Unter dieser Email befindet sich bereits ein registrierter Account.";
             } else if (
-              registrationState === SignUpState.FAILED_USERNAME_TAKEN
+              state.registrationState === SignUpStatus.FAILED_USERNAME_TAKEN
             ) {
-              registrationMessage = "Der Username ist leider bereits vergeben.";
+              state.registrationMessage =
+                "Der Username ist leider bereits vergeben.";
             } else {
               // TODO: BOOM...status nicht existent
             }
           })
           .catch((error) => {
             // TODO: error nutzen für logging
-            registrationMessage =
+            state.registrationMessage =
               "Es tut uns leid, etwas ist schief gelaufen! Der Admin wurde benachrichtigt.";
           })
-          .finally(() => (loading = false));
+          .finally(() => (state.loading = false));
       };
       return {
         v$,
-        user,
+        state,
         handleRegistration,
-        registrationState,
-        registrationMessage,
-        loading,
       };
     },
     methods: {
       submitForm() {
         this.v$.$touch();
         if (!this.v$.$invalid) {
-          this.handleRegistration(this.user);
+          this.handleRegistration(this.state.signUpRequest);
         }
       },
     },
