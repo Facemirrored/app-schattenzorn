@@ -35,12 +35,20 @@
               >Gildenregeln</router-link
             >
           </li>
-          <li class="pt-1 custom-nav-item nav-item">
+          <li v-if="!loggedIn" class="pt-1 custom-nav-item nav-item">
             <router-link
               to="/signUp"
               class="nav-link active"
               aria-current="page"
               >Registrieren</router-link
+            >
+          </li>
+          <li v-if="!loggedIn" class="pt-1 custom-nav-item nav-item">
+            <router-link
+              to="/signIn"
+              class="nav-link active"
+              aria-current="page"
+              >Einloggen</router-link
             >
           </li>
         </ul>
@@ -50,9 +58,17 @@
 </template>
 
 <script lang="ts">
+  import { useStore } from "vuex";
+  import { computed } from "vue";
+  import router from "@/router/router";
+
   export default {
     setup() {
-      return {};
+      const store = useStore();
+      const loggedIn = computed(() => store.getters.getLoginStatus).value;
+      return {
+        loggedIn,
+      };
     },
   };
 </script>
