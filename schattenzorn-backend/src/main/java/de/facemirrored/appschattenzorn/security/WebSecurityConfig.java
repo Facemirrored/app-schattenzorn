@@ -1,8 +1,8 @@
 package de.facemirrored.appschattenzorn.security;
 
-import de.facemirrored.appschattenzorn.security.services.UserDetails.UserDetailsServiceImpl;
 import de.facemirrored.appschattenzorn.security.services.authtokenfilter.AuthEntryPointJwt;
 import de.facemirrored.appschattenzorn.security.services.authtokenfilter.AuthTokenFilter;
+import de.facemirrored.appschattenzorn.security.services.userdetails.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

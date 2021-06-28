@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.security.services.UserDetails;
+package de.facemirrored.appschattenzorn.security.services.userdetails;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.security.services.UserDetails;
+package de.facemirrored.appschattenzorn.security.services.userdetails;
 
 import de.facemirrored.appschattenzorn.database.repository.UserRepository;
 import de.facemirrored.appschattenzorn.security.services.UserDetailsImpl;
