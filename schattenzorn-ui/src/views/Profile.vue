@@ -33,7 +33,7 @@
       const store = useStore();
       return {
         // user from store
-        user: computed(() => store.getters.getUser) as User,
+        user: computed(() => store.getters.getUser) as unknown as User,
       };
     },
   };

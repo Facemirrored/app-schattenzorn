@@ -165,19 +165,17 @@
           })
           .finally(() => (state.loading = false));
       };
+      const submitForm = () => {
+        v$.value.$touch();
+        if (!v$.value.$invalid) {
+          handleRegistration();
+        }
+      };
       return {
         v$,
-        state,
-        handleRegistration,
+        state: state,
+        submitForm,
       };
-    },
-    methods: {
-      submitForm() {
-        this.v$.$touch();
-        if (!this.v$.$invalid) {
-          this.handleRegistration(this.state.signUpRequest);
-        }
-      },
     },
   };
 </script>

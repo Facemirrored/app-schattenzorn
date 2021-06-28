@@ -110,19 +110,17 @@
           })
           .finally(() => (state.loading = false));
       };
+      const submitForm = () => {
+        v$.value.$touch();
+        if (!v$.value.$invalid) {
+          handleLogin();
+        }
+      };
       return {
         state,
         v$,
-        handleLogin,
+        submitForm,
       };
-    },
-    methods: {
-      submitForm() {
-        this.v$.$touch();
-        if (!this.v$.$invalid) {
-          this.handleLogin();
-        }
-      },
     },
   };
 </script>
