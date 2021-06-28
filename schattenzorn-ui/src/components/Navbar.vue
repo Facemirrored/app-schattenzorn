@@ -24,7 +24,7 @@
       </button>
 
       <div id="navbarSupportedContent" class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav mb-2 mb-lg-0 me-auto">
           <li class="pt-1 custom-nav-item nav-item">
             <router-link to="/about" class="nav-link active" aria-current="page"
               >Über Schattenzorn</router-link
@@ -35,21 +35,46 @@
               >Gildenregeln</router-link
             >
           </li>
-          <li v-if="!loggedIn" class="pt-1 custom-nav-item nav-item">
-            <router-link
-              to="/signUp"
-              class="nav-link active"
-              aria-current="page"
-              >Registrieren</router-link
+        </ul>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="pt-1 custom-nav-item nav-item dropdown">
+            <a
+              id="navbarDropdown"
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
             >
-          </li>
-          <li v-if="!loggedIn" class="pt-1 custom-nav-item nav-item">
-            <router-link
-              to="/signIn"
-              class="nav-link active"
-              aria-current="page"
-              >Einloggen</router-link
+              Account
+            </a>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown"
+              style="background-color: rgba(13, 29, 29, 1)"
             >
+              <router-link
+                v-if="!loggedIn"
+                to="/signUp"
+                class="nav-link custom-nav-item dropdown-item"
+                aria-current="page"
+                >Registrieren</router-link
+              >
+              <router-link
+                v-if="!loggedIn"
+                to="/signIn"
+                class="nav-link custom-nav-item dropdown-item"
+                aria-current="page"
+                >Einloggen</router-link
+              >
+              <router-link
+                v-else
+                to="/profile"
+                class="nav-link custom-nav-item dropdown-item"
+                aria-current="page"
+                >Profil</router-link
+              >
+            </ul>
           </li>
         </ul>
       </div>
