@@ -8,7 +8,7 @@ target/
 **/resources/public/
 
 ### Local test db ###
-/schattenzorn-backend/src/main/resources/data/
+/schattenzorn-backend/src/main/resources/data/**
 
 ### STS ###
 .apt_generated
