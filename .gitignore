@@ -7,6 +7,9 @@ target/
 !**/src/test/**/target/
 **/resources/public/
 
+### Local test db ###
+**/resources/data/
+
 ### STS ###
 .apt_generated
 .classpath
