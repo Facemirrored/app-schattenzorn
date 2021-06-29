@@ -7,7 +7,7 @@
         </div>
       </div>
       <hr style="color: white" />
-      <div class="row">
+      <div v-if="user" class="row">
         <div class="col-12 offset-lg-1 col-lg-4" style="color: white">
           <label>Username:</label><span class="ms-5">{{ user.username }}</span>
         </div>
@@ -26,13 +26,17 @@
   import { useStore } from "vuex";
   import { computed } from "vue";
   import { User } from "@/store/auth/interfaces";
+  import router from "@/router/router";
 
   export default {
     name: "Profile",
     setup() {
       const store = useStore();
+      // redirect to home if user is not logged in
+      if (!computed(() => store.getters.getLoginStatus).value) {
+        router.push("/");
+      }
       return {
-        // user from store
         user: computed(() => store.getters.getUser) as unknown as User,
       };
     },

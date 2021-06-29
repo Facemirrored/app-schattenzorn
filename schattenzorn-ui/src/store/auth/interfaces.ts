@@ -35,6 +35,7 @@ export type SignUpRequest = {
   username: string;
   email: string;
   password: string;
+  passwordRepeat?: string;
 };
 
 export type SignUpResponse = {

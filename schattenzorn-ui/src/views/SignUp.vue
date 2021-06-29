@@ -60,10 +60,30 @@
           </div>
         </div>
       </div>
+      <div class="row ms-2 me-2 mb-4 justify-content-center">
+        <div class="form-group col-12 col-md-2 me-md-4">
+          <label for="passwordRepeat" class="col-form-label"
+            >Password Wiederholen:</label
+          >
+        </div>
+        <div class="col-12 col-md-4">
+          <input
+            id="passwordRepeat"
+            v-model="state.signUpRequest.passwordRepeat"
+            type="password"
+            class="form-control custom-input"
+            aria-describedby="userPasswordHelp"
+            @blur="v$.passwordRepeat.$touch"
+          />
+          <div v-if="v$.passwordRepeat.$error" class="ms-md-2 mt-2 input-error">
+            {{ v$.passwordRepeat.$errors[0].$message }}
+          </div>
+        </div>
+      </div>
       <div class="form-group row ms-2 me-2 mb-4 justify-content-center">
         <button
           class="col-12 col-md-4 btn btn-primary btn-block"
-          :disabled="state.loading"
+          :disabled="state.loading || v$.$invalid"
         >
           <span
             v-show="state.loading"
@@ -93,6 +113,7 @@
     maxLength,
     minLength,
     required,
+    sameAs,
   } from "@vuelidate/validators";
 
   // TODO: registrationMessage ausgeben wenn allg. Fehler oder fachl. Fehler
@@ -110,29 +131,45 @@
           username: "",
           email: "",
           password: "",
+          passwordRepeat: "",
         } as SignUpRequest,
         registrationState: {} as SignUpStatus,
         loading: false,
         registrationMessage: "",
       });
       // vuelidate
-      const rules = {
-        username: {
-          required: helpers.withMessage(() => "Usernamen eingeben", required),
-          min: helpers.withMessage(() => "Mindestens 3 Zeichen", minLength(3)),
-          max: helpers.withMessage(() => "Maximal 20 Zeichen", maxLength(20)),
-        },
-        password: {
-          required: helpers.withMessage(() => "Passwort eingeben", required),
-          min: helpers.withMessage(() => "Mindestens 6 Zeichen", minLength(6)),
-          max: helpers.withMessage(() => "Maximal 40 Zeichen", maxLength(40)),
-        },
-        email: {
-          required: helpers.withMessage(() => "Email eingeben", required),
-          email: helpers.withMessage(() => "Invalides Format", email),
-          max: helpers.withMessage(() => "Maximal 50 Zeichen", maxLength(50)),
-        },
-      };
+      const rules = computed(() => {
+        return {
+          username: {
+            required: helpers.withMessage(() => "Usernamen eingeben", required),
+            min: helpers.withMessage(
+              () => "Mindestens 3 Zeichen",
+              minLength(3),
+            ),
+            max: helpers.withMessage(() => "Maximal 20 Zeichen", maxLength(20)),
+          },
+          password: {
+            required: helpers.withMessage(() => "Passwort eingeben", required),
+            min: helpers.withMessage(
+              () => "Mindestens 6 Zeichen",
+              minLength(6),
+            ),
+            max: helpers.withMessage(() => "Maximal 40 Zeichen", maxLength(40)),
+          },
+          passwordRepeat: {
+            required: helpers.withMessage(() => "Passwort eingeben", required),
+            sameAs: helpers.withMessage(
+              () => "Passwort stimmt nicht überein",
+              sameAs(state.signUpRequest.password),
+            ),
+          },
+          email: {
+            required: helpers.withMessage(() => "Email eingeben", required),
+            email: helpers.withMessage(() => "Invalides Format", email),
+            max: helpers.withMessage(() => "Maximal 50 Zeichen", maxLength(50)),
+          },
+        };
+      });
       const v$ = useVuelidate(rules, state.signUpRequest);
       // registration event
       const handleRegistration = () => {

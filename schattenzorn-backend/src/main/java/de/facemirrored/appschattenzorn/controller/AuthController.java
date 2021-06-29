@@ -88,15 +88,13 @@ public class AuthController {
 
     if (Boolean.TRUE.equals(userRepository.existsByEmail(signUpRequest.getEmail()))) {
       return ResponseEntity
-          .badRequest()
-          .body(new SignUpResponse(SignUpStatus.FAILED_EMAIL_TAKEN));
+          .ok(new SignUpResponse(SignUpStatus.FAILED_EMAIL_TAKEN));
     }
 
     if (Boolean.TRUE
         .equals(userRepository.existsByUsername(signUpRequest.getUsername()))) {
       return ResponseEntity
-          .badRequest()
-          .body(new SignUpResponse(SignUpStatus.FAILED_USERNAME_TAKEN));
+          .ok(new SignUpResponse(SignUpStatus.FAILED_USERNAME_TAKEN));
     }
 
     // TODO: extract to Service
