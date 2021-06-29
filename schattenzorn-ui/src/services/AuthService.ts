@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   SignInRequest,
   SignInResponse,
+  SignInStatus,
   SignUpRequest,
   SignUpResponse,
 } from "@/store/auth/interfaces";
@@ -10,7 +11,7 @@ import { Cookies } from "@/ts/interfaces";
 
 const API_URL = import.meta.env.PROD
   ? "https://app-schattenzorn-test.herokuapp.com/api/auth"
-  : "http://localhost:8080/api/auth/";
+  : "http://localhost:8080/api/auth";
 
 class AuthService {
   login(signInRequest: SignInRequest) {
@@ -20,9 +21,6 @@ class AuthService {
         password: signInRequest.password,
       })
       .then((response) => {
-        if (response.data.token) {
-          setCookie(Cookies.AUTH_STATE, JSON.stringify(response.data));
-        }
         return Promise.resolve(response.data as SignInResponse);
       });
   }

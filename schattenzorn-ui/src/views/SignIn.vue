@@ -5,6 +5,11 @@
         <h3 class="ms-2 mt-3 ms-md-5 me-md-5 mt-md-5">Login</h3>
       </div>
     </div>
+    <div v-if="state.loginMessage !== ''" class="row justify-content-center">
+      <div class="col-12 mb-4 text-center" style="color: red">
+        {{ state.loginMessage }}
+      </div>
+    </div>
     <form class="mb-5" @submit.prevent="submitForm">
       <div class="row ms-2 me-2 mb-4 justify-content-center">
         <div class="form-group col-12 col-md-2 me-md-4">
@@ -64,7 +69,7 @@
   import useVuelidate from "@vuelidate/core";
   import { useStore } from "vuex";
   import { ActionTypes } from "@/store/auth/types/action-types";
-  import { SignInRequest, User } from "@/store/auth/interfaces";
+  import { SignInRequest, SignInStatus } from "@/store/auth/interfaces";
   import { useRouter } from "vue-router";
 
   // TODO: registrationMessage ausgeben wenn allg. Fehler oder fachl. Fehler
@@ -101,12 +106,16 @@
         state.loading = true;
         store
           .dispatch(ActionTypes.SIGN_IN, state.signInRequest)
-          .then(() => {
-            router.push("/profile");
+          .then((signInStatus: SignInStatus) => {
+            if (signInStatus === SignInStatus.SUCCESS) {
+              state.loginMessage = "";
+              router.push("/profile");
+            } else {
+              state.loginMessage = "Ungültige Login Daten.";
+            }
           })
           .catch((error) => {
-            // TODO: error nutzung für loggin
-            console.log("HIER IST EIN FEHLER", error.status);
+            console.error(error);
             state.loginMessage =
               "Es tut uns leid, etwas ist schief gelaufen! Der Admin wurde benachrichtigt.";
           })

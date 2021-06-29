@@ -5,7 +5,10 @@
         <h3 class="ms-2 mt-3 ms-md-5 me-md-5 mt-md-5">Registrieren</h3>
       </div>
     </div>
-    <div class="row justify-content-center">
+    <div
+      v-if="state.registrationMessage !== ''"
+      class="row justify-content-center"
+    >
       <div class="col-12 mb-4 text-center" style="color: red">
         {{ state.registrationMessage }}
       </div>
@@ -200,7 +203,7 @@
             }
           })
           .catch((error) => {
-            // TODO: error nutzen für logging
+            console.error(error);
             state.registrationMessage =
               "Es tut uns leid, etwas ist schief gelaufen! Der Admin wurde benachrichtigt.";
           })

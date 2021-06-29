@@ -27,9 +27,15 @@ export type SignInRequest = {
 };
 
 export type SignInResponse = {
+  signInStatus: SignInStatus;
   user: User;
   token: string;
 };
+
+export enum SignInStatus {
+  SUCCESS = "SUCCESS",
+  FAILED = "FAILED",
+}
 
 export type SignUpRequest = {
   username: string;

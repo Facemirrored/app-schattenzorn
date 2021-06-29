@@ -9,6 +9,12 @@
     components: {
       NewsSlot,
     },
+    props: {
+      error: {
+        type: String,
+        default: "",
+      },
+    },
     data() {
       return {};
     },
