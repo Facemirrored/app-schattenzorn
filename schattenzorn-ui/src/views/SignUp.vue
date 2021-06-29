@@ -5,27 +5,14 @@
         <h3 class="ms-2 mt-3 ms-md-5 me-md-5 mt-md-5">Registrieren</h3>
       </div>
     </div>
+    <div class="row justify-content-center">
+      <div class="col-12 mb-4 text-center" style="color: red">
+        {{ state.registrationMessage }}
+      </div>
+    </div>
     <form class="mb-5" @submit.prevent="submitForm">
       <div class="row ms-2 me-2 mb-4 justify-content-center">
-        <div class="form-group col-12 col-md-2 me-md-4">
-          <label for="username" class="col-form-label">Username:</label>
-        </div>
-        <div class="col-12 col-md-4">
-          <input
-            id="username"
-            v-model="state.signUpRequest.username"
-            type="text"
-            class="form-control custom-input"
-            aria-describedby="usernameHelp"
-            @blur="v$.username.$touch"
-          />
-          <div v-if="v$.username.$error" class="ms-md-2 mt-2 input-error">
-            {{ v$.username.$errors[0].$message }}
-          </div>
-        </div>
-      </div>
-      <div class="row ms-2 me-2 mb-4 justify-content-center">
-        <div class="form-group col-12 col-md-2 me-md-4">
+        <div class="form-group col-12 col-md-3 me-md-4">
           <label for="email" class="col-form-label">Email:</label>
         </div>
         <div class="col-12 col-md-4">
@@ -43,7 +30,25 @@
         </div>
       </div>
       <div class="row ms-2 me-2 mb-4 justify-content-center">
-        <div class="form-group col-12 col-md-2 me-md-4">
+        <div class="form-group col-12 col-md-3 me-md-4">
+          <label for="username" class="col-form-label">Username:</label>
+        </div>
+        <div class="col-12 col-md-4">
+          <input
+            id="username"
+            v-model="state.signUpRequest.username"
+            type="text"
+            class="form-control custom-input"
+            aria-describedby="usernameHelp"
+            @blur="v$.username.$touch"
+          />
+          <div v-if="v$.username.$error" class="ms-md-2 mt-2 input-error">
+            {{ v$.username.$errors[0].$message }}
+          </div>
+        </div>
+      </div>
+      <div class="row ms-2 me-2 mb-4 justify-content-center">
+        <div class="form-group col-12 col-md-3 me-md-4">
           <label for="password" class="col-form-label">Password:</label>
         </div>
         <div class="col-12 col-md-4">
@@ -61,10 +66,8 @@
         </div>
       </div>
       <div class="row ms-2 me-2 mb-4 justify-content-center">
-        <div class="form-group col-12 col-md-2 me-md-4">
-          <label for="passwordRepeat" class="col-form-label"
-            >Password Wiederholen:</label
-          >
+        <div class="form-group col-12 col-md-3 me-md-4">
+          <label for="passwordRepeat" class="col-form-label">Bestätigen:</label>
         </div>
         <div class="col-12 col-md-4">
           <input
@@ -99,7 +102,6 @@
 <script lang="ts">
   import { useStore } from "vuex";
   import { computed, reactive } from "vue";
-  import router from "@/router/router";
   import {
     SignUpStatus,
     SignUpResponse,
@@ -115,11 +117,13 @@
     required,
     sameAs,
   } from "@vuelidate/validators";
+  import { useRouter } from "vue-router";
 
   // TODO: registrationMessage ausgeben wenn allg. Fehler oder fachl. Fehler
   export default {
     name: "SignUp",
     setup() {
+      const router = useRouter();
       const store = useStore();
       // redirect to profile if user is already logged in
       if (computed(() => store.getters.getLoginStatus).value) {
@@ -179,8 +183,8 @@
           .then((signUpResponse: SignUpResponse) => {
             state.registrationState = signUpResponse.signupStatus;
             if (state.registrationState === SignUpStatus.SUCCESS) {
-              state.registrationMessage =
-                "Du wurdest soeben erfolgreich registriert!";
+              state.registrationMessage = "";
+              router.push("/signIn");
             } else if (
               state.registrationState === SignUpStatus.FAILED_EMAIL_TAKEN
             ) {

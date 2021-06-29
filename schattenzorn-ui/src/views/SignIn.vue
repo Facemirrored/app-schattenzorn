@@ -63,13 +63,14 @@
   import { helpers, required } from "@vuelidate/validators";
   import useVuelidate from "@vuelidate/core";
   import { useStore } from "vuex";
-  import router from "@/router/router";
   import { ActionTypes } from "@/store/auth/types/action-types";
   import { SignInRequest, User } from "@/store/auth/interfaces";
+  import { useRouter } from "vue-router";
 
   // TODO: registrationMessage ausgeben wenn allg. Fehler oder fachl. Fehler
   export default {
     setup() {
+      const router = useRouter();
       // get store
       const store = useStore();
       // redirect to profile if user is already logged in
@@ -105,6 +106,7 @@
           })
           .catch((error) => {
             // TODO: error nutzung für loggin
+            console.log("HIER IST EIN FEHLER", error.status);
             state.loginMessage =
               "Es tut uns leid, etwas ist schief gelaufen! Der Admin wurde benachrichtigt.";
           })

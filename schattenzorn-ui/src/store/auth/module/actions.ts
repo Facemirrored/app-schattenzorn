@@ -60,15 +60,10 @@ export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
       });
   },
   [ActionTypes.SIGN_IN]({ commit }, payload: SignInRequest) {
-    return AuthService.login(payload)
-      .then((data) => {
-        commit(MutationTypes.LOGIN_SUCCESS, data);
-        return Promise.resolve();
-      })
-      .catch((error) => {
-        console.log("error request login: ", error);
-        return Promise.reject(error);
-      });
+    return AuthService.login(payload).then((data) => {
+      commit(MutationTypes.LOGIN_SUCCESS, data);
+      return Promise.resolve();
+    });
   },
   [ActionTypes.LOGOUT]({ commit }) {
     AuthService.logout();
