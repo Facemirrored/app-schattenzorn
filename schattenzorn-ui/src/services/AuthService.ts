@@ -8,12 +8,14 @@ import {
 import { deleteCookie, setCookie } from "@/ts/cookie-typescript-utils";
 import { Cookies } from "@/ts/interfaces";
 
-const API_URL = "http://localhost:8080/api/auth/";
+const API_URL = import.meta.env.PROD
+  ? "https://app-schattenzorn-test.herokuapp.com/api/auth"
+  : "http://localhost:8080/api/auth/";
 
 class AuthService {
   login(signInRequest: SignInRequest) {
     return axios
-      .post(API_URL + "signIn", {
+      .post(API_URL + "/signIn", {
         username: signInRequest.username,
         password: signInRequest.password,
       })
@@ -31,7 +33,7 @@ class AuthService {
 
   register(signUpRequest: SignUpRequest) {
     return axios
-      .post(API_URL + "signUp", {
+      .post(API_URL + "/signUp", {
         username: signUpRequest.username,
         password: signUpRequest.password,
         email: signUpRequest.email,
