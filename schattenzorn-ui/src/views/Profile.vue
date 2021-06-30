@@ -27,6 +27,7 @@
   import { computed } from "vue";
   import { User } from "@/store/auth/interfaces";
   import router from "@/router/router";
+  import UserService from "@/services/UserService";
 
   export default {
     name: "Profile",
@@ -36,6 +37,11 @@
       if (!computed(() => store.getters.getLoginStatus).value) {
         router.push("/");
       }
+      UserService.getUserBoard();
+      UserService.getPublicContent();
+      UserService.getAdminBoard();
+      UserService.getModeratorBoard();
+
       return {
         user: computed(() => store.getters.getUser) as unknown as User,
       };
