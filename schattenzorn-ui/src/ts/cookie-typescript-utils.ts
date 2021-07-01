@@ -1,7 +1,7 @@
 /*
  * General utils for managing cookies in Typescript.
  */
-export function setCookie(name: string, val: string) {
+export function setStorage(name: string, val: string) {
   const date = new Date();
   const value = val;
 

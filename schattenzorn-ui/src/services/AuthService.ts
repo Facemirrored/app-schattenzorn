@@ -2,12 +2,10 @@ import axios from "axios";
 import {
   SignInRequest,
   SignInResponse,
-  SignInStatus,
   SignUpRequest,
   SignUpResponse,
 } from "@/store/auth/interfaces";
-import { deleteCookie, setCookie } from "@/ts/cookie-typescript-utils";
-import { Cookies } from "@/ts/interfaces";
+import { LocalStorageAttribute } from "@/ts/interfaces";
 
 const API_URL = import.meta.env.PROD
   ? "https://app-schattenzorn-test.herokuapp.com/api/auth"
@@ -26,7 +24,7 @@ class AuthService {
   }
 
   logout() {
-    deleteCookie(Cookies.AUTH_STATE);
+    localStorage.removeItem(LocalStorageAttribute.AUTH_STATE);
   }
 
   register(signUpRequest: SignUpRequest) {

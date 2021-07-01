@@ -32,7 +32,7 @@
     },
     setup() {
       const store = useStore();
-      store.dispatch(ActionTypes.LOAD_COOKIE_USER);
+      store.dispatch(ActionTypes.LOAD_SESSION_USER);
     },
   });
 </script>

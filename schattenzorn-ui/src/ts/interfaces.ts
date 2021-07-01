@@ -15,7 +15,7 @@ export interface NewsSlotItem {
   date: string;
 }
 
-export enum Cookies {
+export enum LocalStorageAttribute {
   AUTH_STATE = "AUTH_STATE",
   LOGGED_IN = "LOGGED_IN",
 }

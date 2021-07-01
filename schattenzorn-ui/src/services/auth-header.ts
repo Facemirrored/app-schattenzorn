@@ -1,9 +1,8 @@
 import { HeaderAuth, User } from "@/store/auth/interfaces";
-import { getCookie } from "@/ts/cookie-typescript-utils";
-import { Cookies } from "@/ts/interfaces";
+import { LocalStorageAttribute } from "@/ts/interfaces";
 
 function getHeader(): HeaderAuth | undefined {
-  const storedUser = getCookie(Cookies.AUTH_STATE);
+  const storedUser = localStorage.getItem(LocalStorageAttribute.AUTH_STATE);
   if (storedUser) {
     return JSON.parse(storedUser) as HeaderAuth;
   }
