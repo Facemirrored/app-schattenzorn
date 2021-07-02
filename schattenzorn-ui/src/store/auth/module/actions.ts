@@ -1,34 +1,27 @@
 import { ActionTypes } from "@/store/auth/types/action-types";
 import { MutationTypes } from "@/store/auth/types/mutation-types";
-import {
-  AuthStateTypes,
-  SignInRequest,
-  SignUpRequest,
-  SignUpStatus,
-  SignUpResponse,
-  User,
-  HeaderAuth,
-  SignInStatus,
-  LoadProfileResponse,
-} from "@/store/auth/interfaces";
+import { AuthState } from "@/store/auth/interfaces";
 import { ActionContext, ActionTree } from "vuex";
 import { Mutations } from "@/store/auth/module/mutations";
-import { IRootState } from "@/store/interfaces";
+import {
+  IRootState,
+  SignInRequest,
+  SignInResponseStatus,
+  SignUpRequest,
+  SignUpResponse,
+  SignUpStatus,
+} from "@/store/interfaces";
 import AuthService from "@/services/AuthService";
 import { LocalStorageAttribute } from "@/ts/interfaces";
-import UserService from "@/services/UserService";
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(
     key: K,
     payload: Parameters<Mutations[K]>[1],
   ): ReturnType<Mutations[K]>;
-} & Omit<ActionContext<AuthStateTypes, IRootState>, "commit">;
+} & Omit<ActionContext<AuthState, IRootState>, "commit">;
 
 export interface Actions {
-  [ActionTypes.LOAD_PROFILE]({
-    commit,
-  }: AugmentedActionContext): Promise<LoadProfileResponse>;
   [ActionTypes.SIGN_UP](
     { commit }: AugmentedActionContext,
     payload: SignUpRequest,
@@ -37,22 +30,12 @@ export interface Actions {
   [ActionTypes.SIGN_IN](
     { commit }: AugmentedActionContext,
     payload: SignInRequest,
-  ): Promise<SignInStatus>;
+  ): Promise<SignInResponseStatus>;
 
   [ActionTypes.LOGOUT]({ commit }: AugmentedActionContext): void;
 }
 
-export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
-  [ActionTypes.LOAD_PROFILE]({ commit }) {
-    return UserService.loadProfile()
-      .then((loadProfileResponse) => {
-        commit(MutationTypes.SET_PROFILE_DATA, loadProfileResponse);
-        return Promise.resolve(loadProfileResponse);
-      })
-      .catch((error) => {
-        return Promise.reject(error);
-      });
-  },
+export const actions: ActionTree<AuthState, IRootState> & Actions = {
   [ActionTypes.SIGN_UP]({ commit }, payload: SignUpRequest) {
     return AuthService.register(payload)
       .then((signUpStatus: SignUpResponse) => {
@@ -71,7 +54,7 @@ export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
   [ActionTypes.SIGN_IN]({ commit }, payload: SignInRequest) {
     return AuthService.login(payload).then((data) => {
       if (
-        data.signInStatus === SignInStatus.SUCCESS &&
+        data.signInStatus === SignInResponseStatus.SUCCESS &&
         data.token &&
         data.user
       ) {

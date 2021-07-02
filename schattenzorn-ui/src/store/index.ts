@@ -1,10 +1,11 @@
-import { createStore, Store } from "vuex";
+import { createStore } from "vuex";
 import { AuthModule } from "@/store/auth/module/auth.module";
-import { IRootState } from "@/store/interfaces";
+import { UserModule } from "@/store/user/module/user.module";
 
 export const state = createStore({
   modules: {
     AuthModule,
+    UserModule,
   },
 });
 

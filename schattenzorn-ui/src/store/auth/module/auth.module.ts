@@ -1,4 +1,4 @@
-import { AuthStateTypes, User } from "@/store/auth/interfaces";
+import { AuthState } from "@/store/auth/interfaces";
 import { CommitOptions, DispatchOptions, Module } from "vuex";
 import { IRootState } from "@/store/interfaces";
 import { Mutations, mutations } from "@/store/auth/module/mutations";
@@ -12,13 +12,12 @@ const token = localStorage.getItem(LocalStorageAttribute.AUTH_STATE) as
   | null;
 
 // initial state
-export const state: AuthStateTypes = {
-  user: undefined,
+export const state: AuthState = {
   loggedIn: !!token,
   token: token === null ? undefined : token,
 };
 
-export type Store<S = AuthStateTypes> = Omit<
+export type Store<S = AuthState> = Omit<
   VuexStore<S>,
   "commit" | "getters" | "dispatch"
 > & {
@@ -39,7 +38,7 @@ export type Store<S = AuthStateTypes> = Omit<
   ): ReturnType<Actions[K]>;
 };
 
-export const AuthModule: Module<AuthStateTypes, IRootState> = {
+export const AuthModule: Module<AuthState, IRootState> = {
   state,
   mutations,
   actions,

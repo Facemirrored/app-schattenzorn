@@ -30,15 +30,45 @@
         </div>
       </div>
     </div>
+    <hr style="color: white" />
+    <div v-for="(character, index) in characters" :key="index" class="row">
+      <div class="col-12 offset-lg-1 col-lg-4" style="color: white">
+        <label>Name:</label
+        ><span class="ms-5">{{ character.characterName }}</span>
+        <label>Level:</label><span class="ms-5">{{ character.level }}</span>
+        <label>Geschlecht:</label
+        ><span class="ms-5">{{ character.male }}</span> <label>Notiz:</label
+        ><span class="ms-5">{{ character.notes }}</span>
+      </div>
+    </div>
+    <div class="form-group row ms-2 me-2 mb-4 justify-content-center">
+      <button
+        class="col-12 col-md-2 btn btn-primary btn-block"
+        :disabled="state.loading"
+        @click="addCharacter"
+      >
+        <span
+          v-show="state.loading"
+          class="spinner-border spinner-border-sm"
+        ></span>
+        Charakter hinzufügen!
+      </button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
   import { useStore } from "vuex";
   import { computed, reactive } from "vue";
-  import { User } from "@/store/auth/interfaces";
-  import { ActionTypes } from "@/store/auth/types/action-types";
+  import { ActionTypes as AuthActions } from "@/store/auth/types/action-types";
+  import { ActionTypes as UserActions } from "@/store/user/types/action-types";
   import { useRouter } from "vue-router";
+  import { Character, User } from "@/store/user/interfaces";
+  import {
+    AddCharacterRequest,
+    AddCharacterResponse,
+    AddCharacterResponseStatus,
+  } from "@/store/interfaces";
 
   export default {
     name: "Profile",
@@ -47,32 +77,63 @@
       const store = useStore();
       // redirect to home if user is not logged in
       if (!computed(() => store.getters.getLoginStatus).value) {
-        router.push("/");
+        router.push("/signIn");
       }
       // data
       const state = reactive({
         loading: false,
+        addCharacterMessage: "",
       });
-      // get user
+      // get profile data
       const user = computed(() => store.getters.getUser);
-      console.log("user", user.value);
-      // load user, if not contained (can happen if page is reloaded)
+      const characters = computed(() => store.getters.getCharacters);
+      // get profile data
       if (!user.value) {
         state.loading = true;
-        console.log("fetch profile");
         store
-          .dispatch(ActionTypes.LOAD_PROFILE)
+          .dispatch(UserActions.LOAD_PROFILE)
           .catch((error) => {
             console.error(error);
-            // in error case log user out and try again
-            store.dispatch(ActionTypes.LOGOUT).then(() => router.push("/"));
+            // in error case log user out + clear data and try again
+            store.dispatch(AuthActions.LOGOUT).then(() => {
+              store
+                .dispatch(UserActions.REMOVE_PROFILE)
+                .then(() => router.push("/"));
+            });
           })
           .finally(() => {
             state.loading = false;
           });
       }
+      // add character
+      const addCharacter = () => {
+        state.loading = true;
+        store
+          .dispatch(UserActions.ADD_CHARACTER, {} as AddCharacterRequest)
+          .then((addCharacterResponse: AddCharacterResponse) => {
+            if (
+              addCharacterResponse.status === AddCharacterResponseStatus.SUCCESS
+            ) {
+              state.addCharacterMessage = "";
+            } else if (
+              addCharacterResponse.status ===
+              AddCharacterResponseStatus.USERNAME_TAKEN
+            ) {
+              state.addCharacterMessage =
+                "Es existiert bereits ein Character mit diesem Usernamen";
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+            state.addCharacterMessage =
+              "Es tut uns leid, etwas ist schief gelaufen! Der Admin wurde benachrichtigt.";
+          })
+          .finally(() => (state.loading = false));
+      };
       return {
-        user,
+        addCharacter,
+        characters: characters as Character[],
+        user: user as User,
         state,
       };
     },

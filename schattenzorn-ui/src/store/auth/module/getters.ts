@@ -1,13 +1,11 @@
-import { AuthStateTypes, User } from "@/store/auth/interfaces";
+import { AuthState } from "@/store/auth/interfaces";
 import { GetterTree } from "vuex";
 import { IRootState } from "@/store/interfaces";
 
 export type Getters = {
-  getUser(state: AuthStateTypes): User | undefined;
-  getLoginStatus(state: AuthStateTypes): boolean;
+  getLoginStatus(state: AuthState): boolean;
 };
 
-export const getters: GetterTree<AuthStateTypes, IRootState> & Getters = {
-  getUser: (state) => state.user,
+export const getters: GetterTree<AuthState, IRootState> & Getters = {
   getLoginStatus: (state) => state.loggedIn,
 };

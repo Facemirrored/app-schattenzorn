@@ -1,16 +1,9 @@
 import { MutationTypes } from "@/store/auth/types/mutation-types";
-import {
-  AuthStateTypes,
-  LoadProfileResponse,
-  SignInResponse,
-} from "@/store/auth/interfaces";
+import { AuthState } from "@/store/auth/interfaces";
 import { MutationTree } from "vuex";
+import { SignInResponse } from "@/store/interfaces";
 
-export type Mutations<S = AuthStateTypes> = {
-  [MutationTypes.SET_PROFILE_DATA](
-    state: S,
-    payload: LoadProfileResponse,
-  ): void;
+export type Mutations<S = AuthState> = {
   [MutationTypes.LOGIN_SUCCESS](state: S, payload: SignInResponse): void;
   [MutationTypes.LOGIN_FAILURE](state: S): void;
   [MutationTypes.LOGOUT](state: S): void;
@@ -18,12 +11,8 @@ export type Mutations<S = AuthStateTypes> = {
   [MutationTypes.REGISTER_FAILURE](state: S): void;
 };
 
-export const mutations: MutationTree<AuthStateTypes> & Mutations = {
-  [MutationTypes.SET_PROFILE_DATA](state, payload) {
-    state.user = payload.user;
-  },
+export const mutations: MutationTree<AuthState> & Mutations = {
   [MutationTypes.LOGIN_SUCCESS](state, payload) {
-    state.user = payload.user;
     state.token = payload.token;
     state.loggedIn = true;
   },
@@ -31,7 +20,6 @@ export const mutations: MutationTree<AuthStateTypes> & Mutations = {
     state.loggedIn = false;
   },
   [MutationTypes.LOGOUT](state) {
-    state.user = undefined;
     state.token = "";
     state.loggedIn = false;
   },

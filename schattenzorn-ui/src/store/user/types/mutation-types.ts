@@ -1,0 +1,5 @@
+export enum MutationTypes {
+  ADD_Character = "ADD_CHARACTER",
+  SET_PROFILE_DATA = "SET_PROFILE_DATA",
+  CLEAR_PROFILE_DATA = "CLEAR_PROFILE_DATA",
+}

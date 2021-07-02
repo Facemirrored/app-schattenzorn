@@ -105,11 +105,6 @@
 <script lang="ts">
   import { useStore } from "vuex";
   import { computed, reactive } from "vue";
-  import {
-    SignUpStatus,
-    SignUpResponse,
-    SignUpRequest,
-  } from "@/store/auth/interfaces";
   import { ActionTypes } from "@/store/auth/types/action-types";
   import useVuelidate from "@vuelidate/core";
   import {
@@ -121,6 +116,11 @@
     sameAs,
   } from "@vuelidate/validators";
   import { useRouter } from "vue-router";
+  import {
+    SignUpRequest,
+    SignUpResponse,
+    SignUpStatus,
+  } from "@/store/interfaces";
 
   // TODO: registrationMessage ausgeben wenn allg. Fehler oder fachl. Fehler
   export default {

@@ -69,8 +69,8 @@
   import useVuelidate from "@vuelidate/core";
   import { useStore } from "vuex";
   import { ActionTypes } from "@/store/auth/types/action-types";
-  import { SignInRequest, SignInStatus } from "@/store/auth/interfaces";
   import { useRouter } from "vue-router";
+  import { SignInRequest, SignInResponseStatus } from "@/store/interfaces";
 
   // TODO: registrationMessage ausgeben wenn allg. Fehler oder fachl. Fehler
   export default {
@@ -106,8 +106,8 @@
         state.loading = true;
         store
           .dispatch(ActionTypes.SIGN_IN, state.signInRequest)
-          .then((signInStatus: SignInStatus) => {
-            if (signInStatus === SignInStatus.SUCCESS) {
+          .then((signInStatus: SignInResponseStatus) => {
+            if (signInStatus === SignInResponseStatus.SUCCESS) {
               state.loginMessage = "";
               router.push("/profile");
             } else {
