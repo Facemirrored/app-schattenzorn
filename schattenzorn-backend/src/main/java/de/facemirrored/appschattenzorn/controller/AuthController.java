@@ -1,20 +1,15 @@
 package de.facemirrored.appschattenzorn.controller;
 
-import de.facemirrored.appschattenzorn.database.repository.RoleRepository;
 import de.facemirrored.appschattenzorn.database.repository.UserRepository;
-import de.facemirrored.appschattenzorn.rest.SignInRequest;
-import de.facemirrored.appschattenzorn.rest.SignInResponse;
-import de.facemirrored.appschattenzorn.rest.SignUpRequest;
-import de.facemirrored.appschattenzorn.rest.SignUpResponse;
+import de.facemirrored.appschattenzorn.rest.signIn.SignInRequest;
+import de.facemirrored.appschattenzorn.rest.signIn.SignInResponse;
+import de.facemirrored.appschattenzorn.rest.signUp.SignUpRequest;
+import de.facemirrored.appschattenzorn.rest.signUp.SignUpResponse;
 import de.facemirrored.appschattenzorn.rest.model.SignUpStatus;
-import de.facemirrored.appschattenzorn.security.services.authtokenfilter.JwtUtils;
 import de.facemirrored.appschattenzorn.services.AuthService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,17 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-  private final AuthenticationManager authenticationManager;
-
   private final UserRepository userRepository;
-
-  private final RoleRepository roleRepository;
-
-  private final PasswordEncoder encoder;
 
   private final AuthService authService;
 
-  private final JwtUtils jwtUtils;
 
   @PostMapping(path = "/signIn", consumes = "application/json", produces = "application/json")
   public ResponseEntity<SignInResponse> authenticateUser(

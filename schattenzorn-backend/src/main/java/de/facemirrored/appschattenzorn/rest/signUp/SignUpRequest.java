@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.rest;
+package de.facemirrored.appschattenzorn.rest.signUp;
 
 import lombok.Builder;
 import lombok.Data;

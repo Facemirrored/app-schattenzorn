@@ -1,11 +1,10 @@
 export type AuthStateTypes = {
   user?: User;
-  token: string;
+  token?: string;
   loggedIn: boolean;
 };
 
 export type HeaderAuth = {
-  user: User;
   token: string;
 };
 
@@ -53,3 +52,7 @@ export enum SignUpStatus {
   FAILED_EMAIL_TAKEN = "FAILED_EMAIL_TAKEN",
   FAILED_USERNAME_TAKEN = "FAILED_USERNAME_TAKEN",
 }
+
+export type LoadProfileResponse = {
+  user: User;
+};

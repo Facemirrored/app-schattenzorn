@@ -9,13 +9,14 @@ import {
   User,
   HeaderAuth,
   SignInStatus,
+  LoadProfileResponse,
 } from "@/store/auth/interfaces";
 import { ActionContext, ActionTree } from "vuex";
 import { Mutations } from "@/store/auth/module/mutations";
 import { IRootState } from "@/store/interfaces";
 import AuthService from "@/services/AuthService";
-import { userSession } from "@/services/auth-header";
 import { LocalStorageAttribute } from "@/ts/interfaces";
+import UserService from "@/services/UserService";
 
 type AugmentedActionContext = {
   commit<K extends keyof Mutations>(
@@ -25,7 +26,9 @@ type AugmentedActionContext = {
 } & Omit<ActionContext<AuthStateTypes, IRootState>, "commit">;
 
 export interface Actions {
-  [ActionTypes.LOAD_SESSION_USER]({ commit }: AugmentedActionContext): void;
+  [ActionTypes.LOAD_PROFILE]({
+    commit,
+  }: AugmentedActionContext): Promise<LoadProfileResponse>;
   [ActionTypes.SIGN_UP](
     { commit }: AugmentedActionContext,
     payload: SignUpRequest,
@@ -40,11 +43,15 @@ export interface Actions {
 }
 
 export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
-  [ActionTypes.LOAD_SESSION_USER]({ commit }) {
-    const headerAuth: HeaderAuth | undefined = userSession();
-    if (headerAuth) {
-      commit(MutationTypes.SET_SESSION, headerAuth);
-    }
+  [ActionTypes.LOAD_PROFILE]({ commit }) {
+    return UserService.loadProfile()
+      .then((loadProfileResponse) => {
+        commit(MutationTypes.SET_PROFILE_DATA, loadProfileResponse);
+        return Promise.resolve(loadProfileResponse);
+      })
+      .catch((error) => {
+        return Promise.reject(error);
+      });
   },
   [ActionTypes.SIGN_UP]({ commit }, payload: SignUpRequest) {
     return AuthService.register(payload)
@@ -57,7 +64,7 @@ export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
         return Promise.resolve(signUpStatus);
       })
       .catch((error) => {
-        console.log("error request sign up user: ", error);
+        console.error(error);
         return Promise.reject(error);
       });
   },
@@ -70,7 +77,7 @@ export const actions: ActionTree<AuthStateTypes, IRootState> & Actions = {
       ) {
         localStorage.setItem(
           LocalStorageAttribute.AUTH_STATE,
-          JSON.stringify(data),
+          JSON.stringify(data.token),
         );
         commit(MutationTypes.LOGIN_SUCCESS, data);
       } else {

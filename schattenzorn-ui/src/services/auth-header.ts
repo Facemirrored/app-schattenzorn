@@ -1,10 +1,10 @@
-import { HeaderAuth, User } from "@/store/auth/interfaces";
+import { HeaderAuth } from "@/store/auth/interfaces";
 import { LocalStorageAttribute } from "@/ts/interfaces";
 
 function getHeader(): HeaderAuth | undefined {
-  const storedUser = localStorage.getItem(LocalStorageAttribute.AUTH_STATE);
-  if (storedUser) {
-    return JSON.parse(storedUser) as HeaderAuth;
+  const storedToken = localStorage.getItem(LocalStorageAttribute.AUTH_STATE);
+  if (storedToken) {
+    return JSON.parse(storedToken) as HeaderAuth;
   }
   return undefined;
 }
@@ -12,17 +12,8 @@ function getHeader(): HeaderAuth | undefined {
 export function authHeader(): unknown | undefined {
   const authState = getHeader();
 
-  if (authState && authState.token) {
-    return { Authorization: "Bearer " + authState.token };
-  }
-  return undefined;
-}
-
-export function userSession(): HeaderAuth | undefined {
-  const authState = getHeader();
-
-  if (authState && authState) {
-    return authState;
+  if (authState) {
+    return { Authorization: "Bearer " + authState };
   }
   return undefined;
 }

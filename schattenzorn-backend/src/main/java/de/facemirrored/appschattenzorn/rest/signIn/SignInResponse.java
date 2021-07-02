@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.rest;
+package de.facemirrored.appschattenzorn.rest.signIn;
 
 import de.facemirrored.appschattenzorn.rest.model.SignInStatus;
 import de.facemirrored.appschattenzorn.rest.model.User;

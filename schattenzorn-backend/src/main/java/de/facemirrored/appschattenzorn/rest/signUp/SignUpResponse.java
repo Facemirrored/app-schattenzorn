@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.rest;
+package de.facemirrored.appschattenzorn.rest.signUp;
 
 
 import de.facemirrored.appschattenzorn.rest.model.SignUpStatus;
@@ -18,4 +18,5 @@ public class SignUpResponse {
   }
 
   private SignUpStatus signupStatus;
+
 }

@@ -5,12 +5,17 @@ import { Mutations, mutations } from "@/store/auth/module/mutations";
 import { Actions, actions } from "@/store/auth/module/actions";
 import { Getters, getters } from "@/store/auth/module/getters";
 import { Store as VuexStore } from "vuex";
+import { LocalStorageAttribute } from "@/ts/interfaces";
+
+const token = localStorage.getItem(LocalStorageAttribute.AUTH_STATE) as
+  | string
+  | null;
 
 // initial state
 export const state: AuthStateTypes = {
   user: undefined,
-  loggedIn: false,
-  token: "",
+  loggedIn: !!token,
+  token: token === null ? undefined : token,
 };
 
 export type Store<S = AuthStateTypes> = Omit<
