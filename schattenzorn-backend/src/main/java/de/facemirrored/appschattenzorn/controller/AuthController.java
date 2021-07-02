@@ -1,6 +1,6 @@
 package de.facemirrored.appschattenzorn.controller;
 
-import de.facemirrored.appschattenzorn.database.repository.UserRepository;
+import de.facemirrored.appschattenzorn.database.UserRepository;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInRequest;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInResponse;
 import de.facemirrored.appschattenzorn.rest.signUp.SignUpRequest;
@@ -10,6 +10,7 @@ import de.facemirrored.appschattenzorn.services.AuthService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/auth")
 public class AuthController {
 

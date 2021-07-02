@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.database.model;
+package de.facemirrored.appschattenzorn.database;
 
 public enum ERole {
   ROLE_USER,

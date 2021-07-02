@@ -1,11 +1,11 @@
 package de.facemirrored.appschattenzorn.services;
 
 import de.facemirrored.appschattenzorn.controller.exception.RepoDataNotFoundException;
-import de.facemirrored.appschattenzorn.database.model.ERole;
-import de.facemirrored.appschattenzorn.database.model.Role;
-import de.facemirrored.appschattenzorn.database.model.User;
-import de.facemirrored.appschattenzorn.database.repository.RoleRepository;
-import de.facemirrored.appschattenzorn.database.repository.UserRepository;
+import de.facemirrored.appschattenzorn.database.ERole;
+import de.facemirrored.appschattenzorn.database.Role;
+import de.facemirrored.appschattenzorn.database.User;
+import de.facemirrored.appschattenzorn.database.RoleRepository;
+import de.facemirrored.appschattenzorn.database.UserRepository;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInRequest;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInResponse;
 import de.facemirrored.appschattenzorn.rest.signUp.SignUpRequest;
@@ -31,7 +31,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-  private static final Logger logger = LogManager.getLogger(AuthService.class.getName());
+  private static final Logger logger = LogManager.getLogger(AuthService.class);
 
   private final AuthenticationManager authenticationManager;
 

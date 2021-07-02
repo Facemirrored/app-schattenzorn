@@ -2,7 +2,7 @@ package de.facemirrored.appschattenzorn.security.services;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.facemirrored.appschattenzorn.database.model.User;
+import de.facemirrored.appschattenzorn.database.User;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;

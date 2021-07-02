@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.database.model;
+package de.facemirrored.appschattenzorn.database;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

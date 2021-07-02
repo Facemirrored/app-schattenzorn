@@ -1,6 +1,5 @@
-package de.facemirrored.appschattenzorn.database.repository;
+package de.facemirrored.appschattenzorn.database;
 
-import de.facemirrored.appschattenzorn.database.model.User;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;

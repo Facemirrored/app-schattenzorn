@@ -4,6 +4,7 @@ import de.facemirrored.appschattenzorn.rest.model.User;
 import de.facemirrored.appschattenzorn.rest.user.LoadProfileResponse;
 import de.facemirrored.appschattenzorn.security.services.UserDetailsImpl;
 import de.facemirrored.appschattenzorn.security.services.userdetails.UserDetailsServiceImpl;
+import de.facemirrored.appschattenzorn.services.UserService;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,16 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class UserController {
 
-  private final UserDetailsServiceImpl userDetailsService;
+  private final UserService userService;
 
   @GetMapping("/getUser")
   public ResponseEntity<LoadProfileResponse> getUser(Authentication authentication) {
-    UserDetailsImpl userDetails =
-        (UserDetailsImpl) userDetailsService.loadUserByUsername(authentication.getName());
-    return ResponseEntity.ok(LoadProfileResponse.builder().user(User.builder()
-        .email(userDetails.getEmail()).username(userDetails.getUsername())
-        .roles(userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(
-            Collectors.toList()))
-        .build()).build());
+    return ResponseEntity.ok(userService.getProfile(authentication.getName()));
   }
 }
