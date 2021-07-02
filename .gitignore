@@ -9,6 +9,7 @@ target/
 
 ### Local test db ###
 **/data/
+**/application-uat.properties
 
 ### STS ###
 .apt_generated
