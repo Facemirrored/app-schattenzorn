@@ -36,6 +36,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
       authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
       SecurityContextHolder.getContext().setAuthentication(authentication);
+    } else {
+      logger.warn("Request: " + request.getRequestURI() + ":::JWT token null or invalid: " + jwt);
     }
 
     filterChain.doFilter(request, response);
