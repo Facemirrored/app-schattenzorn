@@ -1,7 +1,9 @@
 import axios from "axios";
 import { authHeader } from "@/services/auth-header";
 
-const API_URL = "http://localhost:8080/api/test/";
+const API_URL = import.meta.env.PROD
+  ? "https://app-schattenzorn-test.herokuapp.com/api/test/"
+  : "http://localhost:8080/api/test/";
 
 class UserService {
   getPublicContent() {
