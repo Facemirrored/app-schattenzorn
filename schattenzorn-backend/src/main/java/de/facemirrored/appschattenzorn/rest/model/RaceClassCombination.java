@@ -8,17 +8,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Character implements Serializable {
+public class RaceClassCombination implements Serializable {
 
-  private static final long serialVersionUID = -3184351242992380191L;
-
-  private String characterName;
-
-  private boolean male;
-
-  private int level;
-
-  private String notes;
+  private static final long serialVersionUID = -8951012348214485238L;
 
   private EPlayerRace playerRace;
 

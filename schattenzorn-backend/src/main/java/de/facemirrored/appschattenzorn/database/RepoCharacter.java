@@ -19,7 +19,7 @@ import lombok.Setter;
     })
 @Getter
 @Setter
-public class Character implements Serializable {
+public class RepoCharacter implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,5 +39,12 @@ public class Character implements Serializable {
   @Size(max = 500)
   private String notes;
 
+  @NotBlank
   private Long userId;
+
+  @NotBlank
+  private Long playerRace;
+
+  @NotBlank
+  private Long playerClass;
 }
