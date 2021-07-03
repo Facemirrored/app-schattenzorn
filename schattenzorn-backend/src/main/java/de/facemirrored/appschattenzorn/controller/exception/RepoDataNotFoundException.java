@@ -1,6 +1,6 @@
 package de.facemirrored.appschattenzorn.controller.exception;
 
-public class RepoDataNotFoundException extends ApplicationException {
+public class RepoDataNotFoundException extends Exception {
 
   public RepoDataNotFoundException() {
     super();

@@ -2,8 +2,8 @@ package de.facemirrored.appschattenzorn.services;
 
 import de.facemirrored.appschattenzorn.controller.exception.RepoDataNotFoundException;
 import de.facemirrored.appschattenzorn.database.ERole;
+import de.facemirrored.appschattenzorn.database.RepoUser;
 import de.facemirrored.appschattenzorn.database.Role;
-import de.facemirrored.appschattenzorn.database.User;
 import de.facemirrored.appschattenzorn.database.RoleRepository;
 import de.facemirrored.appschattenzorn.database.UserRepository;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInRequest;
@@ -76,7 +76,7 @@ public class AuthService {
   public void signUpUser(SignUpRequest request) {
     // initialize database user
     var user =
-        new User(request.getUsername(), request.getEmail(),
+        new RepoUser(request.getUsername(), request.getEmail(),
             encoder.encode((request.getPassword())));
     Set<Role> roles = new HashSet<>();
 

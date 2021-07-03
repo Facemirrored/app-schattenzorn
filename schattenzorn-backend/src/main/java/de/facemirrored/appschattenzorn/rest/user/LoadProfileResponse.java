@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.rest.profile;
+package de.facemirrored.appschattenzorn.rest.user;
 
 import de.facemirrored.appschattenzorn.database.ERole;
 import de.facemirrored.appschattenzorn.rest.model.Character;

@@ -26,7 +26,7 @@ import lombok.Setter;
     })
 @Getter
 @Setter
-public class User implements Serializable {
+public class RepoUser implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,10 +48,10 @@ public class User implements Serializable {
   @ManyToMany(fetch = FetchType.LAZY)
   private Set<Role> roles = new HashSet<>();
 
-  public User() {
+  public RepoUser() {
   }
 
-  public User(String username, String email, String password) {
+  public RepoUser(String username, String email, String password) {
     this.username = username;
     this.email = email;
     this.password = password;

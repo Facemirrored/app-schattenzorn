@@ -30,7 +30,7 @@ class UserService {
   }
   loadProfile(): Promise<LoadProfileResponse> {
     return axios
-      .get(API_URL + "getUser", {
+      .get(API_URL + "getProfile", {
         headers: authHeader(),
       })
       .then((response) => {

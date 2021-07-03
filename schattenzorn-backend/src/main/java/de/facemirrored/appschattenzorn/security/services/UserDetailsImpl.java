@@ -2,7 +2,7 @@ package de.facemirrored.appschattenzorn.security.services;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.facemirrored.appschattenzorn.database.User;
+import de.facemirrored.appschattenzorn.database.RepoUser;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -34,16 +34,16 @@ public class UserDetailsImpl implements UserDetails {
     this.authorities = authorities;
   }
 
-  public static UserDetailsImpl build(User user) {
-    List<GrantedAuthority> authorities = user.getRoles().stream()
+  public static UserDetailsImpl build(RepoUser repoUser) {
+    List<GrantedAuthority> authorities = repoUser.getRoles().stream()
         .map(role -> new SimpleGrantedAuthority(role.getName().name()))
         .collect(Collectors.toList());
 
     return new UserDetailsImpl(
-        user.getId(),
-        user.getUsername(),
-        user.getEmail(),
-        user.getPassword(),
+        repoUser.getId(),
+        repoUser.getUsername(),
+        repoUser.getEmail(),
+        repoUser.getPassword(),
         authorities);
   }
 

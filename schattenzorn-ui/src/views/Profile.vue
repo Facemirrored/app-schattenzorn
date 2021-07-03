@@ -18,15 +18,15 @@
         </div>
       </div>
       <hr style="color: white" />
-      <div v-if="user" class="row">
+      <div v-if="repoUser" class="row">
         <div class="col-12 offset-lg-1 col-lg-4" style="color: white">
-          <label>Username:</label><span class="ms-5">{{ user.username }}</span>
+          <label>Username:</label><span class="ms-5">{{ repoUser.username }}</span>
         </div>
         <div class="col-12 offset-lg-1 col-lg-4" style="color: white">
-          <label>Email:</label><span class="ms-5">{{ user.email }}</span>
+          <label>Email:</label><span class="ms-5">{{ repoUser.email }}</span>
         </div>
         <div class="col-12 offset-lg-1 col-lg-4" style="color: white">
-          <label>Rollen:</label><span class="ms-5">{{ user.roles }}</span>
+          <label>Rollen:</label><span class="ms-5">{{ repoUser.roles }}</span>
         </div>
       </div>
     </div>
@@ -61,9 +61,9 @@
   import { useStore } from "vuex";
   import { computed, reactive } from "vue";
   import { ActionTypes as AuthActions } from "@/store/auth/types/action-types";
-  import { ActionTypes as UserActions } from "@/store/user/types/action-types";
+  import { ActionTypes as UserActions } from "@/store/repoUser/types/action-types";
   import { useRouter } from "vue-router";
-  import { Character, User } from "@/store/user/interfaces";
+  import { Character, User } from "@/store/repoUser/interfaces";
   import {
     AddCharacterRequest,
     AddCharacterResponse,
@@ -75,7 +75,7 @@
     setup() {
       const router = useRouter();
       const store = useStore();
-      // redirect to home if user is not logged in
+      // redirect to home if repoUser is not logged in
       if (!computed(() => store.getters.getLoginStatus).value) {
         router.push("/signIn");
       }
@@ -85,16 +85,16 @@
         addCharacterMessage: "",
       });
       // get profile data
-      const user = computed(() => store.getters.getUser);
+      const repoUser = computed(() => store.getters.getUser);
       const characters = computed(() => store.getters.getCharacters);
       // get profile data
-      if (!user.value) {
+      if (!repoUser.value) {
         state.loading = true;
         store
           .dispatch(UserActions.LOAD_PROFILE)
           .catch((error) => {
             console.error(error);
-            // in error case log user out + clear data and try again
+            // in error case log repoUser out + clear data and try again
             store.dispatch(AuthActions.LOGOUT).then(() => {
               store
                 .dispatch(UserActions.REMOVE_PROFILE)
@@ -133,7 +133,7 @@
       return {
         addCharacter,
         characters: characters as Character[],
-        user: user as User,
+        repoUser: repoUser as User,
         state,
       };
     },

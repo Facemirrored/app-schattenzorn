@@ -5,6 +5,7 @@ import {
   SignInResponseStatus,
   IRootState,
   LoadProfileResponse,
+  AddCharacterResponseStatus,
 } from "@/store/interfaces";
 import { UserState } from "@/store/user/interfaces";
 import { ActionTypes } from "@/store/user/types/action-types";
@@ -48,7 +49,9 @@ export const actions: ActionTree<UserState, IRootState> & Actions = {
   [ActionTypes.ADD_CHARACTER]({ commit }, payload: AddCharacterRequest) {
     return UserService.addCharacter(payload)
       .then((addCharacterResponse) => {
-        if (addCharacterResponse.status === SignInResponseStatus.SUCCESS) {
+        if (
+          addCharacterResponse.status === AddCharacterResponseStatus.SUCCESS
+        ) {
           commit(MutationTypes.ADD_Character, addCharacterResponse.character);
         }
         return Promise.resolve(addCharacterResponse);

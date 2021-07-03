@@ -128,7 +128,7 @@
     setup() {
       const router = useRouter();
       const store = useStore();
-      // redirect to profile if user is already logged in
+      // redirect to profile if repoUser is already logged in
       if (computed(() => store.getters.getLoginStatus).value) {
         router.push("/profile");
       }
