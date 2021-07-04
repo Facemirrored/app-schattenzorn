@@ -11,4 +11,6 @@ public interface CharacterRepository extends JpaRepository<RepoCharacter, Long> 
   List<RepoCharacter> findAllByUserId(Long userId);
 
   Optional<RepoCharacter> findByCharacterName(String characterName);
+
+  void deleteByCharacterName(String characterName);
 }

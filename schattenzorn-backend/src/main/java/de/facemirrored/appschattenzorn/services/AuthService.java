@@ -1,24 +1,25 @@
 package de.facemirrored.appschattenzorn.services;
 
+import de.facemirrored.appschattenzorn.controller.exception.ApplicationException;
 import de.facemirrored.appschattenzorn.controller.exception.RepoDataNotFoundException;
 import de.facemirrored.appschattenzorn.database.ERole;
 import de.facemirrored.appschattenzorn.database.RepoUser;
 import de.facemirrored.appschattenzorn.database.Role;
 import de.facemirrored.appschattenzorn.database.RoleRepository;
 import de.facemirrored.appschattenzorn.database.UserRepository;
+import de.facemirrored.appschattenzorn.rest.model.Status;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInRequest;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInResponse;
 import de.facemirrored.appschattenzorn.rest.signUp.SignUpRequest;
-import de.facemirrored.appschattenzorn.rest.model.SignInStatus;
-import de.facemirrored.appschattenzorn.security.services.UserDetailsImpl;
-import de.facemirrored.appschattenzorn.security.services.authtokenfilter.JwtUtils;
+import de.facemirrored.appschattenzorn.config.security.UserDetailsImpl;
+import de.facemirrored.appschattenzorn.config.security.authtokenfilter.JwtUtils;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -28,10 +29,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class AuthService {
 
   private static final Logger logger = LogManager.getLogger(AuthService.class);
+
+  private final String repoNotFoundMessage;
 
   private final AuthenticationManager authenticationManager;
 
@@ -42,6 +44,20 @@ public class AuthService {
   private final RoleRepository roleRepository;
 
   private final JwtUtils jwtUtils;
+
+  public AuthService(
+      @Value("${message.error.repositoryDataNotFound}") String repoNotFoundMessage,
+      AuthenticationManager authenticationManager,
+      PasswordEncoder encoder, UserRepository userRepository,
+      RoleRepository roleRepository,
+      JwtUtils jwtUtils) {
+    this.repoNotFoundMessage = repoNotFoundMessage;
+    this.authenticationManager = authenticationManager;
+    this.encoder = encoder;
+    this.userRepository = userRepository;
+    this.roleRepository = roleRepository;
+    this.jwtUtils = jwtUtils;
+  }
 
   public SignInResponse authenticateUser(SignInRequest request) {
     try {
@@ -58,7 +74,7 @@ public class AuthService {
           .collect(Collectors.toList());
 
       return SignInResponse.builder()
-          .signInStatus(SignInStatus.SUCCESS)
+          .signInStatus(Status.SUCCESS)
           .token(jwt)
           .user(de.facemirrored.appschattenzorn.rest.model.User.builder()
               .username(userDetails.getUsername()).email(userDetails.getEmail()).roles(roles)
@@ -68,7 +84,7 @@ public class AuthService {
     } catch (AuthenticationException e) {
 
       logger.info("User authentication in login process has failed");
-      return SignInResponse.builder().signInStatus(SignInStatus.FAILED).build();
+      return SignInResponse.builder().signInStatus(Status.FAILED).build();
 
     }
   }
@@ -81,7 +97,8 @@ public class AuthService {
     Set<Role> roles = new HashSet<>();
 
     final var userRole = roleRepository.findByName(ERole.ROLE_USER)
-        .orElseThrow(() -> new RepoDataNotFoundException("Error: Role 'USER' is not found."));
+        .orElseThrow(() -> new ApplicationException(repoNotFoundMessage,
+            new RepoDataNotFoundException("Error: Role 'USER' is not found.")));
     roles.add(userRole);
     user.setRoles(roles);
 

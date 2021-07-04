@@ -1,6 +1,6 @@
-package de.facemirrored.appschattenzorn.security.services.authtokenfilter;
+package de.facemirrored.appschattenzorn.config.security.authtokenfilter;
 
-import de.facemirrored.appschattenzorn.security.services.userdetails.UserDetailsServiceImpl;
+import de.facemirrored.appschattenzorn.config.security.userdetails.UserDetailsServiceImpl;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

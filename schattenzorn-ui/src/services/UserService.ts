@@ -17,7 +17,6 @@ class UserService {
     addCharacterRequest: AddCharacterRequest,
   ): Promise<AddCharacterResponse> {
     // TODO: backend call + frontend validation
-    console.log(addCharacterRequest);
     return Promise.resolve({
       character: {
         characterName: "neuer char",

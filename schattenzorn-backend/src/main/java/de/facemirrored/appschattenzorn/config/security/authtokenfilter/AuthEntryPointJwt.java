@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.security.services.authtokenfilter;
+package de.facemirrored.appschattenzorn.config.security.authtokenfilter;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;

@@ -17,14 +17,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@RequiredArgsConstructor
 @Component
 public class UserServiceMapper {
 
-  @Value("${Repository data not found.}")
   private final String repoNotFoundMessage;
 
   private final UserServiceRepoManager userServiceRepoManager;
+
+  public UserServiceMapper(
+      @Value("${message.error.repositoryDataNotFound}") String repoNotFoundMessage,
+      UserServiceRepoManager userServiceRepoManager) {
+    this.repoNotFoundMessage = repoNotFoundMessage;
+    this.userServiceRepoManager = userServiceRepoManager;
+  }
 
   public User mapRepoUserToUiUser(RepoUser repoUser) {
     return User.builder()
@@ -38,7 +43,8 @@ public class UserServiceMapper {
   }
 
 
-  public RepoCharacter mapUiCharacterToRepoCharacter(final Character character) {
+  public RepoCharacter mapUiCharacterToRepoCharacter(final Character character,
+      final boolean dirty) {
     try {
       // get repo ids from ui strings
       final Long playerClassId =
@@ -53,6 +59,14 @@ public class UserServiceMapper {
       repoCharacter.setNotes(character.getNotes());
       repoCharacter.setPlayerClass(playerClassId);
       repoCharacter.setPlayerRace(playerRaceId);
+
+      if (!dirty) {
+        // get repo character id
+        final Long characterId =
+            userServiceRepoManager.getCharacterByName(character.getCharacterName()).getId();
+        repoCharacter.setId(characterId);
+      }
+
       return repoCharacter;
     } catch (RepoDataNotFoundException e) {
       log.error(repoNotFoundMessage, e);

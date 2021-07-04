@@ -1,7 +1,7 @@
-package de.facemirrored.appschattenzorn.security.services.authtokenfilter;
+package de.facemirrored.appschattenzorn.config.security.authtokenfilter;
 
 
-import de.facemirrored.appschattenzorn.security.services.UserDetailsImpl;
+import de.facemirrored.appschattenzorn.config.security.UserDetailsImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;

@@ -1,7 +1,7 @@
-package de.facemirrored.appschattenzorn.security.services.userdetails;
+package de.facemirrored.appschattenzorn.config.security.userdetails;
 
 import de.facemirrored.appschattenzorn.database.UserRepository;
-import de.facemirrored.appschattenzorn.security.services.UserDetailsImpl;
+import de.facemirrored.appschattenzorn.config.security.UserDetailsImpl;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

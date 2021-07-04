@@ -1,11 +1,12 @@
-package de.facemirrored.appschattenzorn.security;
+package de.facemirrored.appschattenzorn.config.prod;
 
-import de.facemirrored.appschattenzorn.security.services.authtokenfilter.AuthEntryPointJwt;
-import de.facemirrored.appschattenzorn.security.services.authtokenfilter.AuthTokenFilter;
-import de.facemirrored.appschattenzorn.security.services.userdetails.UserDetailsServiceImpl;
+import de.facemirrored.appschattenzorn.config.security.authtokenfilter.AuthEntryPointJwt;
+import de.facemirrored.appschattenzorn.config.security.authtokenfilter.AuthTokenFilter;
+import de.facemirrored.appschattenzorn.config.security.userdetails.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -23,6 +24,7 @@ import org.springframework.web.cors.CorsConfiguration;
 @EnableGlobalMethodSecurity(
     prePostEnabled = true
 )
+@Profile({"prod", "uat", "dev"})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   final UserDetailsServiceImpl userDetailsService;
@@ -71,7 +73,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
         .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-        .antMatchers("/api/test/**").permitAll()
+        .antMatchers("/api/user/**").authenticated()
+        // TODO: SWAGGER-UI Authenticated with login
         .antMatchers("/**").permitAll()
         .anyRequest().authenticated();
 

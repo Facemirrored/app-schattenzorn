@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.security.services;
+package de.facemirrored.appschattenzorn.config.security;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

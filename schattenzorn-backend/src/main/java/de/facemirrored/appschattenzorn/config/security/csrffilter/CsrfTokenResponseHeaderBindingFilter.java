@@ -1,4 +1,4 @@
-package de.facemirrored.appschattenzorn.security.services.csrffilter;
+package de.facemirrored.appschattenzorn.config.security.csrffilter;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;

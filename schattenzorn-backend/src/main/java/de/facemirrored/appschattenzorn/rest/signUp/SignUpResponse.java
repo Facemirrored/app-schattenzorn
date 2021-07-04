@@ -1,7 +1,7 @@
 package de.facemirrored.appschattenzorn.rest.signUp;
 
 
-import de.facemirrored.appschattenzorn.rest.model.SignUpStatus;
+import de.facemirrored.appschattenzorn.rest.model.Status;
 import java.io.Serializable;
 import lombok.Builder;
 import lombok.Data;
@@ -14,10 +14,10 @@ public class SignUpResponse implements Serializable {
 
   private static final long serialVersionUID = -4422169581228686255L;
 
-  public SignUpResponse(SignUpStatus signupStatus) {
+  public SignUpResponse(Status signupStatus) {
     this.signupStatus = signupStatus;
   }
 
-  private SignUpStatus signupStatus;
+  private Status signupStatus;
 
 }

@@ -8,9 +8,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AddCharacterResponse implements Serializable {
+public class EditCharacterResponse implements Serializable {
 
-  private static final long serialVersionUID = -8695144393324300287L;
+  private static final long serialVersionUID = -1575970750751886533L;
 
   private Status status;
 

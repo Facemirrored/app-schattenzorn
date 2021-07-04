@@ -31,6 +31,10 @@ public class UserServiceRepoManager {
     return characterRepository.save(repoCharacter);
   }
 
+  public void deleteCharacterByName(final String name) {
+    characterRepository.deleteByCharacterName(name);
+  }
+
   public RepoCharacter getCharacterByName(final String name) throws RepoDataNotFoundException {
     return characterRepository.findByCharacterName(name)
         .orElseThrow(() -> new RepoDataNotFoundException(
