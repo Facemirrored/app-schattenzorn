@@ -3,14 +3,14 @@ package de.facemirrored.appschattenzorn.services;
 import de.facemirrored.appschattenzorn.controller.exception.ApplicationException;
 import de.facemirrored.appschattenzorn.controller.exception.RepoDataNotFoundException;
 import de.facemirrored.appschattenzorn.database.ERole;
+import de.facemirrored.appschattenzorn.database.RepoRole;
 import de.facemirrored.appschattenzorn.database.RepoUser;
-import de.facemirrored.appschattenzorn.database.Role;
 import de.facemirrored.appschattenzorn.database.RoleRepository;
 import de.facemirrored.appschattenzorn.database.UserRepository;
 import de.facemirrored.appschattenzorn.rest.model.Status;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInRequest;
 import de.facemirrored.appschattenzorn.rest.signIn.SignInResponse;
-import de.facemirrored.appschattenzorn.rest.signUp.SignUpRequest;
+import de.facemirrored.appschattenzorn.rest.signup.SignUpRequest;
 import de.facemirrored.appschattenzorn.config.security.UserDetailsImpl;
 import de.facemirrored.appschattenzorn.config.security.authtokenfilter.JwtUtils;
 import java.util.HashSet;
@@ -94,13 +94,13 @@ public class AuthService {
     var user =
         new RepoUser(request.getUsername(), request.getEmail(),
             encoder.encode((request.getPassword())));
-    Set<Role> roles = new HashSet<>();
+    Set<RepoRole> repoRoles = new HashSet<>();
 
     final var userRole = roleRepository.findByName(ERole.ROLE_USER)
         .orElseThrow(() -> new ApplicationException(repoNotFoundMessage,
             new RepoDataNotFoundException("Error: Role 'USER' is not found.")));
-    roles.add(userRole);
-    user.setRoles(roles);
+    repoRoles.add(userRole);
+    user.setRepoRoles(repoRoles);
 
     // save user
     userRepository.save(user);

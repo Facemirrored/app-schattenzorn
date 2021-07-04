@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +16,9 @@ import lombok.Setter;
 @Table(name = "roles")
 @Getter
 @Setter
-public class Role {
+@Builder
+@AllArgsConstructor
+public class RepoRole {
 
   @Id
   @GeneratedValue
@@ -24,11 +28,11 @@ public class Role {
   @Column(length = 20)
   private ERole name;
 
-  public Role(ERole name) {
+  public RepoRole(ERole name) {
     this.name = name;
   }
 
-  public Role() {
+  public RepoRole() {
 
   }
 }

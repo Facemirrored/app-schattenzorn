@@ -26,7 +26,7 @@
           <label>Email:</label><span class="ms-5">{{ repoUser.email }}</span>
         </div>
         <div class="col-12 offset-lg-1 col-lg-4" style="color: white">
-          <label>Rollen:</label><span class="ms-5">{{ repoUser.roles }}</span>
+          <label>Rollen:</label><span class="ms-5">{{ repoUser.repoRoles }}</span>
         </div>
       </div>
     </div>

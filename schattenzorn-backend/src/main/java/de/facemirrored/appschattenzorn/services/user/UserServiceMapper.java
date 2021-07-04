@@ -11,7 +11,6 @@ import de.facemirrored.appschattenzorn.rest.model.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -35,7 +34,7 @@ public class UserServiceMapper {
     return User.builder()
         .username(repoUser.getUsername())
         .email(repoUser.getEmail())
-        .roles(repoUser.getRoles()
+        .roles(repoUser.getRepoRoles()
             .stream()
             .map(role -> role.getName().name())
             .collect(Collectors.toList()))

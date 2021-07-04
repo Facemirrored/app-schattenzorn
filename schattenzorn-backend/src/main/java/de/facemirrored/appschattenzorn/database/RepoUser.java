@@ -15,6 +15,8 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +28,8 @@ import lombok.Setter;
     })
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class RepoUser implements Serializable {
 
   @Id
@@ -46,7 +50,7 @@ public class RepoUser implements Serializable {
   private String password;
 
   @ManyToMany(fetch = FetchType.LAZY)
-  private Set<Role> roles = new HashSet<>();
+  private Set<RepoRole> repoRoles = new HashSet<>();
 
   public RepoUser() {
   }
@@ -55,5 +59,37 @@ public class RepoUser implements Serializable {
     this.username = username;
     this.email = email;
     this.password = password;
+  }
+
+  @Override public int hashCode() {
+    return super.hashCode();
+  }
+
+  @Override public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
+    }
+    if (this.getClass() != obj.getClass()) {
+      return false;
+    }
+    var repoUser = (RepoUser) obj;
+    if (this.id == null) {
+      return repoUser.id == null;
+    }
+    if (this.username == null) {
+      return repoUser.username == null;
+    }
+    if (this.email == null) {
+      return repoUser.email == null;
+    }
+    if (this.password == null) {
+      return repoUser.password == null;
+    }
+    if (repoUser.id == null || repoUser.username == null ||repoUser.password == null || repoUser.email == null) {
+      return false;
+    }
+    return this.email.equals(repoUser.email) && this.username.equals(repoUser.username)
+        && this.repoRoles.equals(repoUser.repoRoles)
+        && this.password.equals(repoUser.getPassword()) && this.id.intValue() == repoUser.id.intValue();
   }
 }
